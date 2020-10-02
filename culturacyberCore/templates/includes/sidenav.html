@@ -1,0 +1,110 @@
+
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="bg">
+					
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+				
+					{% if user.is_authenticated %}
+
+						<div class="user">
+							<div class="avatar-sm float-left mr-2">
+								<img src="/static/assets/img/user.png" alt="..." class="avatar-img rounded-circle">
+							</div>
+							<div class="info">
+								<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+									<span>
+										{{ request.user.user }}
+										<span class="user-level">
+										{{ request.user.email }}  
+										</span>
+										<span class="caret"></span>
+									</span>
+								</a>
+								
+								<div class="collapse in" id="collapseExample">
+									<ul class="nav">
+										<li>
+											<a href={% url 'logout' %}>
+												<span class="link-collapse">Desconectarse</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<ul class="nav nav-primary">
+
+							<li class="nav-item {% if segment == 'home' %} active {% endif %}">
+								<a href="home">
+									<i class="fas fa-home"></i>
+									<p>Menu principal</p>
+								</a>
+							</li>
+
+							{% if request.user.name == admin %}
+
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Administración</h4>
+							</li>
+
+							<li class="nav-item {% if segment == 'admin' %} active {% endif %}">
+								<a data-toggle="collapse" href="#submenuadmin">
+									<i class="fas fa-list-ol"></i>
+									<p>Administrar</p>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="submenuadmin">
+									<ul class="nav nav-collapse">
+										<li>
+											<a href="crear_encuestas">
+												<span class="sub-item">Crear encuestas</span>
+											</a>
+										</li>
+										<li>
+											<a href="crear_post">
+												<span class="sub-item">Redactar post</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							
+							{% endif %}
+
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Componentes</h4>
+							</li>
+
+
+							<li class="nav-item {% if segment == 'surveys' %} active {% endif %}">
+								<a data-toggle="collapse" href="#submenu">
+									<i class="fas fa-list-ol"></i>
+									<p>Encuestas</p>
+									<span class="caret"></span>
+								</a>
+								<div class="collapse" id="submenu">
+									<ul class="nav nav-collapse">
+										<li>
+											<a href="listado_encuestas">
+												<span class="sub-item">Listado de encuestas</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					
+					{% endif %}	
+
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->

@@ -1,0 +1,192 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Crear encuestas {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<div class="page-inner">
+
+    <div class="page-header">
+        <h4 class="page-title">Crear encuestas</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="{% url 'home' %} ">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="">Crear encuestas</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+
+   
+    <div class="col-md-2 text-center mt-3">
+        <div id="fixeddiv">
+
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-category mt--2 mb-2">Nueva pregunta</p>
+                    <button id="adddiv" type="button" class="btn btn-icon btn-round btn-primary"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-category mt--2 mb-2">N° preguntas</p>
+                    <h1 class="text-secondary fw-bold" id="count"></h1>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+
+        <label for="surveytitle">Nombre:</label>
+        <input type="text" class="form-control form-control-lg mb-4" placeholder="ingresa el nombre del formulario" id="surveytitle">
+        
+        <label for="descrptionsurvey">Descripción:</label>
+        <textarea name="" id="descrptionsurvey" cols="30" rows="5" class="form-control mb-5" placeholder="Ingresa una descripción para el formulario"></textarea>
+        
+        <hr>
+
+        <div class="page-title mt-5">
+            Listado de preguntas
+        </div>
+
+        <div id="cardcontent">
+
+            <div id="cardtemplate">
+                <div class="card mt-3" id="counter">
+                    <div class="card-title card-header row">
+                        <input type="text" class="form-control col-md-7" placeholder="Escribe aquí la pregunta">
+                        <select name="typequestion" id="defaultSelect" class="form-control form-control col-md-3 ml-auto">
+                            <option value="">Alternativas</option>
+                            <option value="">Libre</option>
+                        </select>
+                    </div>
+        
+                    <div class="card-body col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addonA">A )</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Alternativa A" aria-describedby="basic-addonA">
+                        </div>
+        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addonB">B )</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Alternativa B" aria-describedby="basic-addonB">
+                        </div>
+        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addonC">C )</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Alternativa C" aria-describedby="basic-addonV">
+                        </div>
+        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addonD">D )</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Alternativa D" aria-describedby="basic-addonD">
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-title card-header row" id="counter">
+                    <input type="text" class="form-control col-md-7" placeholder="Escribe aquí la pregunta">
+                    <select name="typequestion" id="defaultSelect" class="form-control form-control col-md-3 ml-auto">
+                        <option value="">Libre</option>
+                        <option value="">Alternativas</option>
+                    </select>
+                </div>
+    
+                <div class="card-body col-md-12">
+                    <textarea name="" id="" rows="10" style="width: 100%; resize: none;" disabled></textarea>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row row-card-no-pd" id="surveytoolbar">
+
+            <div class="col-md-5">
+                <div class="card card-stats card-round">
+                    <div class="card-body ml-auto mr-auto">
+                        <button id="adddiv2" type="button" class="btn btn-primary" >Nueva pregunta</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card card-stats card-round">
+                    <div class="card-body ml-auto mr-auto text-center">
+                        <p class="card-category">N° preguntas</p>
+                        <h1 class="text-secondary fw-bold" id="count2"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card card-stats card-round">
+                    <div class="card-body ml-auto mr-auto">
+                        <a href="" class="btn btn-success">Crear</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %} 
+
+<script>
+
+    $(document).ready(function() {
+        $("#count,#count2").text($("div[id^=counter]").length);
+    });
+
+    var i = 0;
+    $("#adddiv,#adddiv2").click(function() {
+        var div = document.createElement('div');
+        div.innerHTML = document.getElementById('cardtemplate').innerHTML;
+        var contenedor = document.getElementById('cardcontent');
+        contenedor.appendChild(div);
+
+        $("#count,#count2").text($("div[id^=counter]").length);
+
+        div.classList.add("animation", "faded-out");
+
+        requestAnimationFrame(() => {
+            div.classList.remove("faded-out")
+            });
+    });
+
+</script>
+
+{% endblock javascripts %}

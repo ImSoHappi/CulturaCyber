@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Menu principal {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<div class="page-inner">
+
+    <div class="page-header">
+        <h4 class="page-title">Menu principal</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="{% url 'home' %} ">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    {% for post in post_list %}
+
+        <div class="card" id="postlist">
+            <div class="card-title card-header">
+                <a href="">{{ post.title }}</a>
+            </div>
+            <div class="card-body row">
+  
+                <img src="media/{{ post.postimg }}" alt="">
+
+                <div class="col-md">
+                    <p>{{ post.contentbody | striptags | truncatechars:1400}}</p>
+                    <a href="">ver más</a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}
+
+
+
+{% block javascripts %} {% endblock javascripts %}

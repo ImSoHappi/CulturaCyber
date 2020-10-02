@@ -1,0 +1,92 @@
+#postlist{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 400px;
+}
+
+#postlist img{
+    width: 400px;
+    height: 300px;
+    display:block;
+    padding: 10px;
+    padding-top: 0px !important;
+    border-radius: 25px;
+}
+
+@media only screen and (max-width: 1200px) {
+    #postlist img{
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #postlist{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 700px;
+    }
+    #postlist img{
+        margin-right: auto;
+        margin-left: auto;
+        width: 70%;
+        height: 300px;
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+
+    #postlist img{
+        width: 100%;
+        height: 200px;
+    }
+}
+
+
+#carouseltextbox{
+    background-color: #71c1ffc5;
+    height: 300px;
+    border-radius: 20px;
+}
+
+#carouselbutton{
+    margin-top: 220px;
+}
+
+@media only screen and (max-width: 768px) {
+    #carouseltextbox{
+        height: 480px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #carouselbutton{
+        margin-top: 0;
+    }
+}
+
+.animation.faded-out{
+    opacity: 0;
+}
+
+.animation{
+    background-color: black;
+    border-radius: 50px;
+    transition: opacity 2000ms;
+    will-change: opacity;
+}
+
+#surveytoolbar {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+}
+
+#fixeddiv{
+    position: fixed;
+}
+
+@media only screen and (max-width: 1255px) {
+    #fixeddiv{
+        display: none;
+    }
+}
