@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'culturacyberBase.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd77ofkk158gi0m',
+        'USER': 'afoexoiijllxgi',
+        'PASSWORD': '1acd0fbdf64d9d0dc7898edf76622d78326719a5eb2db53c9c8b841c8f394149',
+        'HOST': 'ec2-54-160-161-214.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -126,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'culturacyberCore/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'culturacyberCore/collectstatic/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'culturacyberCore/media/')
