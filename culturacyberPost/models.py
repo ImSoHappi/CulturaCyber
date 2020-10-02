@@ -2,7 +2,6 @@ from django.db import models
 import uuid
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-from PIL import Image
 
 # Create your models here.
 
