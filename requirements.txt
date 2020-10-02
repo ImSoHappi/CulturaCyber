@@ -1,2 +1,6 @@
 Django
 django-ckeditor
+
+gunicorn
+whitenoise
+psycopg2
