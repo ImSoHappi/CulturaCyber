@@ -14,7 +14,7 @@
         <h4 class="page-title">Menu principal</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
-                <a href="{% url 'home' %} ">
+                <a href="{% url 'home' %}">
                     <i class="flaticon-home"></i>
                 </a>
             </li>
@@ -23,17 +23,22 @@
 
     {% for post in post_list %}
 
-        <div class="card" id="postlist">
+        <div class="card col-md-12" id="postlist">
             <div class="card-title card-header">
-                <a href="">{{ post.title }}</a>
+                <a href="{% url 'post_detail' post_uuid=post.uuid %}"><b>{{ post.title }}</b></a>
+                <p class="text-muted">{{ post.created_at }}</p>
             </div>
             <div class="card-body row">
   
                 <img src="media/{{ post.postimg }}" alt="">
 
-                <div class="col-md">
-                    <p>{{ post.contentbody | striptags | truncatechars:1400}}</p>
-                    <a href="">ver más</a>
+                <div class="" id="textcontent">
+                    <div id="textcard">
+                        <p class="blockquote blockquote-primary">{{ post.contentbody | striptags }}</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'post_detail' post_uuid=post.uuid %}" class="lead pull-right">Seguir leyendo</a>
+                    </div>
                 </div>
             </div>
         </div>

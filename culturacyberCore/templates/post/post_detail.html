@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+<div class="page-inner">
+
+    <div class="page-header">
+        <h4 class="page-title">{{ post.title }}</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="{% url 'home' %}">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+            <li class="nav-item">
+                <a href="">{{ post.title }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title ">{{ post.title }}</h1>
+            <h6 class="text-muted">{{ post.created_at }}</h6>
+        </div>
+
+        <div class="card-body col-md-11 ml-auto mr-auto mt-4 mb-4">
+            {{ post.contentbody | safe }}
+        </div>
+    </div>
+
+    <div class="card">
+        <a id="attach_files"></a>
+        <div class="card-header">
+            <h3 class="card-title">Materiales{% if request.user.name == admin %}<a onclick="open_modal('{% url 'add_attached' post_uuid=post.uuid %}')" style="cursor: pointer; margin-left: 15px;"><i class="fas fa-plus" style="color: rgb(135, 216, 14);"></i></a>{% endif %}</h3>
+        </div>
+        <div class="card-body row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead class="text-primary">
+                        <th><b>Nombre del archivo</b></th>
+                        <th width="10%"><b>
+                            
+                        </b></th>
+                    </thead>
+                    <tbody>
+                        {% for file in files %}
+                        <tr>
+                            <td><a href="{{ file.file.url }}" download target="_blank">{{ file.name }}</a></td>
+                            <td><a href="{{ file.file.url }}" download target="_blank">
+                                <i class="fas fa-download fa-lg"></i>
+                            </a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="attachedmodal" role="dialog">
+
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %} 
+
+<script type="text/javascript">
+    function open_modal(url){
+        $('#attachedmodal').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+</script>
+
+{% endblock javascripts %}

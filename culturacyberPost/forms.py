@@ -10,3 +10,12 @@ class postForm(forms.ModelForm):
             'contentbody': forms.Textarea(attrs={'class': 'form-control', 'name': 'text', 'rows': '20'}),
             'postimg': forms.FileInput(attrs={'class': 'form-control mb-4'})
         }
+
+class attachedForm(forms.ModelForm):
+    class Meta:
+        model = attachedModel
+        fields = ('name', 'file',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'id': 'title', 'placeholder': 'Nombre del archivo'}),
+            'file': forms.FileInput(attrs={'class': 'form-control'})
+        }

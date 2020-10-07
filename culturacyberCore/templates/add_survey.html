@@ -4,8 +4,6 @@
 
 {% block stylesheets %} {% endblock stylesheets %}
 
-
-
 {% block content %}
 
 <div class="page-inner">
@@ -29,54 +27,53 @@
 
     <div class="row">
 
-   
-    <div class="col-md-2 text-center mt-3">
-        <div id="fixeddiv">
+        <div class="col-md-2 text-center mt-3">
+            <div id="fixeddiv">
 
 
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-category mt--2 mb-2">Nueva pregunta</p>
-                    <button id="adddiv" type="button" class="btn btn-icon btn-round btn-primary"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-category mt--2 mb-2">N° preguntas</p>
-                    <h1 class="text-secondary fw-bold" id="count"></h1>
-                </div>
-            </div>
-         
-        </div>
-    </div>
-
-    <div class="form-group col-md-8">
-
-        <label for="surveytitle">Nombre:</label>
-        <input type="text" class="form-control form-control-lg mb-4" placeholder="ingresa el nombre del formulario" id="surveytitle">
-        
-        <label for="descrptionsurvey">Descripción:</label>
-        <textarea name="" id="descrptionsurvey" cols="30" rows="5" class="form-control mb-5" placeholder="Ingresa una descripción para el formulario"></textarea>
-        
-        <hr>
-
-        <div class="page-title mt-5">
-            Listado de preguntas
-        </div>
-
-        <div id="cardcontent">
-
-            <div id="cardtemplate">
-                <div class="card mt-3" id="counter">
-                    <div class="card-title card-header row">
-                        <input type="text" class="form-control col-md-7" placeholder="Escribe aquí la pregunta">
-                        <select name="typequestion" id="defaultSelect" class="form-control form-control col-md-3 ml-auto">
-                            <option value="">Alternativas</option>
-                            <option value="">Libre</option>
-                        </select>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-category mt--2 mb-2">Nueva pregunta</p>
+                        <div>
+                            <button onclick="new_question('alternativestemplate')" class="btn btn-secondary">Alternativas</button>
+                        </div>
+                        <br>
+                        <div>
+                            <button onclick="new_question('freetemplate')" class="btn btn-secondary">Libre</button>
+                        </div>
                     </div>
-        
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-category mt--2 mb-2">N° preguntas</p>
+                        <h1 class="text-secondary fw-bold" id="count1">0</h1>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+
+        <div class="form-group col-md-8">
+
+            <label for="surveytitle">Nombre:</label>
+            <input type="text" class="form-control form-control-lg mb-4" placeholder="ingresa el nombre del formulario" id="surveytitle">
+            
+            <label for="descrptionsurvey">Descripción:</label>
+            <textarea name="" id="descrptionsurvey" cols="30" rows="5" class="form-control mb-5" placeholder="Ingresa una descripción para el formulario"></textarea>
+            
+            <hr>
+
+            <div class="page-title mt-5">
+                Listado de preguntas
+            </div>
+
+            <div id="alternativestemplate" style="display: none;">
+                <div class="card mt-3" id="count">
+                    <div class="card-title card-header row">
+                        <input type="text" class="form-control col-md-7 mr-auto ml-auto" placeholder="Escribe aquí la pregunta" style="text-align: center;">
+                        <a id="removequestion"><i class="fas fa-trash-alt" style="color: red;"></i></a>
+                    </div>
                     <div class="card-body col-md-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -84,80 +81,82 @@
                             </div>
                             <input type="text" class="form-control" placeholder="Alternativa A" aria-describedby="basic-addonA">
                         </div>
-        
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addonB">B )</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Alternativa B" aria-describedby="basic-addonB">
                         </div>
-        
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addonC">C )</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Alternativa C" aria-describedby="basic-addonV">
                         </div>
-        
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addonD">D )</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Alternativa D" aria-describedby="basic-addonD">
-                        </div>                    
+                        </div>        
                     </div>
                 </div>
             </div>
-            
-            <div class="card mt-3">
-                <div class="card-title card-header row" id="counter">
-                    <input type="text" class="form-control col-md-7" placeholder="Escribe aquí la pregunta">
-                    <select name="typequestion" id="defaultSelect" class="form-control form-control col-md-3 ml-auto">
-                        <option value="">Libre</option>
-                        <option value="">Alternativas</option>
-                    </select>
-                </div>
-    
-                <div class="card-body col-md-12">
-                    <textarea name="" id="" rows="10" style="width: 100%; resize: none;" disabled></textarea>
+
+            <div id="freetemplate" style="display: none;">
+                <div class="card mt-3" id="count">
+                    <div class="card-title card-header row">
+                        <input type="text" class="form-control col-md-7 mr-auto ml-auto" placeholder="Escribe aquí la pregunta" style="text-align: center;">
+                        <a id="removequestion"><i class="fas fa-trash-alt" style="color: red;"></i></a>
+                    </div>
+                    <div class="card-body col-md-12">
+                        <textarea name="" id="" rows="10" style="width: 100%; resize: none; padding-bottom: 14.12px;" disabled></textarea>
+                    </div>
                 </div>
             </div>
 
+            <div id="cardcontent">   
+
+            </div>
+
+            <div class="row row-card-no-pd" id="surveytoolbar">
+
+                <div class="col-md-4">
+                    <div class="card card-stats card-round">
+                        <div class="card-body ml-auto mr-auto text-center">
+                            <p class="card-category text-center">Nueva pregunta</p>
+                            <div>
+                                <button onclick="new_question('alternativestemplate')" class="btn btn-secondary">Alternativas</button>
+                            </div>
+                            <br>
+                            <div>
+                                <button onclick="new_question('freetemplate')" class="btn btn-secondary">Libre</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-stats card-round">
+                        <div class="card-body ml-auto mr-auto text-center">
+                            <p class="card-category">N° preguntas</p>
+                            <h1 class="text-secondary fw-bold" id="count2">0</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-stats card-round text-center">
+                        <div class="card-body ml-auto mr-auto">
+                            <p class="card-category">Crear encuesta</p>
+                            <a href="" class="btn btn-success">Crear</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-
-
-        <div class="row row-card-no-pd" id="surveytoolbar">
-
-            <div class="col-md-5">
-                <div class="card card-stats card-round">
-                    <div class="card-body ml-auto mr-auto">
-                        <button id="adddiv2" type="button" class="btn btn-primary" >Nueva pregunta</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="card card-stats card-round">
-                    <div class="card-body ml-auto mr-auto text-center">
-                        <p class="card-category">N° preguntas</p>
-                        <h1 class="text-secondary fw-bold" id="count2"></h1>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-5">
-                <div class="card card-stats card-round">
-                    <div class="card-body ml-auto mr-auto">
-                        <a href="" class="btn btn-success">Crear</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        
     </div>
-</div>
 </div>
 
 {% endblock content %}
@@ -167,26 +166,26 @@
 
 <script>
 
-    $(document).ready(function() {
-        $("#count,#count2").text($("div[id^=counter]").length);
-    });
-
-    var i = 0;
-    $("#adddiv,#adddiv2").click(function() {
+    function new_question(type){
         var div = document.createElement('div');
-        div.innerHTML = document.getElementById('cardtemplate').innerHTML;
+        div.innerHTML = document.getElementById(type).innerHTML;
         var contenedor = document.getElementById('cardcontent');
         contenedor.appendChild(div);
 
-        $("#count,#count2").text($("div[id^=counter]").length);
-
-        div.classList.add("animation", "faded-out");
+        div.classList.add("animation", "faded-out", "removediv");
+        $("#count1,#count2").text($("#cardcontent #count").length);
 
         requestAnimationFrame(() => {
             div.classList.remove("faded-out")
-            });
+        });
+    }
+
+    $(document).on('click', '#removequestion', function(){
+        $(this).closest('.removediv').remove()
+        $("#count1,#count2").text($("#cardcontent #count").length);
     });
 
+    
 </script>
 
 {% endblock javascripts %}

@@ -37,7 +37,7 @@
 						<ul class="nav nav-primary">
 
 							<li class="nav-item {% if segment == 'home' %} active {% endif %}">
-								<a href="home">
+								<a href="{% url 'home' %}">
 									<i class="fas fa-home"></i>
 									<p>Menu principal</p>
 								</a>
@@ -61,12 +61,12 @@
 								<div class="collapse" id="submenuadmin">
 									<ul class="nav nav-collapse">
 										<li>
-											<a href="crear_encuestas">
+											<a href="{% url 'add_survey' %}">
 												<span class="sub-item">Crear encuestas</span>
 											</a>
 										</li>
 										<li>
-											<a href="crear_post">
+											<a href="{% url 'add_post' %}">
 												<span class="sub-item">Redactar post</span>
 											</a>
 										</li>
@@ -93,7 +93,7 @@
 								<div class="collapse" id="submenu">
 									<ul class="nav nav-collapse">
 										<li>
-											<a href="listado_encuestas">
+											<a href="{% url 'survey_list' %}">
 												<span class="sub-item">Listado de encuestas</span>
 											</a>
 										</li>
