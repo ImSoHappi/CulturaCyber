@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from culturacyberPost.models import *
 
 # Create your views here.
 
@@ -9,8 +8,7 @@ def home(request):
 
     context = {}
     context['segment'] = 'home'
-    context['post_list'] = postModel.objects.all()
-    return render(request, 'home.html', context=context)
+    return render(request, 'organizers_templates/home.html', context=context)
 
 
 @login_required(login_url='login')
