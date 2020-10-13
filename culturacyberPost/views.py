@@ -56,3 +56,10 @@ def add_attached(request, post_uuid):
     context['post'] = postModel.objects.get(uuid=post_uuid)
     context['form'] = attachedForm
     return render(request, 'post/add_attached.html', context=context)
+
+
+@login_required(login_url='login')
+def module_detail(request):
+
+
+    return render(request, 'modules/module.html')

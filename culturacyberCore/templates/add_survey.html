@@ -30,7 +30,6 @@
         <div class="col-md-2 text-center mt-3">
             <div id="fixeddiv">
 
-
                 <div class="card">
                     <div class="card-body">
                         <p class="card-category mt--2 mb-2">Nueva pregunta</p>
@@ -40,6 +39,10 @@
                         <br>
                         <div>
                             <button onclick="new_question('freetemplate')" class="btn btn-secondary">Libre</button>
+                        </div>
+                        <br>
+                        <div>
+                            <button onclick="new_question('valuetemplate')" class="btn btn-secondary">Apreciación</button>
                         </div>
                     </div>
                 </div>
@@ -115,6 +118,39 @@
                 </div>
             </div>
 
+            <div id="valuetemplate" style="display: none;">
+                <div class="card mt-3" id="count">
+                    <div class="card-title card-header row">
+                        <input type="text" class="form-control col-md-7 mr-auto ml-auto" placeholder="Escribe aquí la pregunta" style="text-align: center;">
+                        <a id="removequestion"><i class="fas fa-trash-alt" style="color: red;"></i></a>
+                    </div>
+                    <div class="form-group">
+                        <div class="selectgroup w-100">
+                            <label class="selectgroup-item">
+                                <input type="radio" name="value" value="1" class="selectgroup-input" disabled>
+                                <span class="selectgroup-button"> totalmente En desacuerdo</span>
+                            </label>
+                            <label class="selectgroup-item">
+                                <input type="radio" name="value" value="2" class="selectgroup-input" disabled>
+                                <span class="selectgroup-button">En desacuerdo</span>
+                            </label>
+                            <label class="selectgroup-item">
+                                <input type="radio" name="value" value="3" class="selectgroup-input" disabled>
+                                <span class="selectgroup-button">Ni acuerdo ni en desacuerdo</span>
+                            </label>
+                            <label class="selectgroup-item">
+                                <input type="radio" name="value" value="4" class="selectgroup-input" disabled>
+                                <span class="selectgroup-button">De acuerdo</span>
+                            </label>
+                            <label class="selectgroup-item">
+                                <input type="radio" name="value" value="5" class="selectgroup-input" disabled>
+                                <span class="selectgroup-button">Totalmente de acuerdo</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="cardcontent">   
 
             </div>
@@ -184,7 +220,6 @@
         $(this).closest('.removediv').remove()
         $("#count1,#count2").text($("#cardcontent #count").length);
     });
-
     
 </script>
 

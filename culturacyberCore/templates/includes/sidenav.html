@@ -1,4 +1,3 @@
-
 		<!-- Sidebar -->
 		<div class="sidebar sidebar-style-2" data-background-color="bg">
 					
@@ -53,6 +52,7 @@
 							</li>
 
 							<li class="nav-item {% if segment == 'admin' %} active {% endif %}">
+
 								<a data-toggle="collapse" href="#submenuadmin">
 									<i class="fas fa-list-ol"></i>
 									<p>Administrar</p>
@@ -80,26 +80,36 @@
 								<span class="sidebar-mini-icon">
 									<i class="fa fa-ellipsis-h"></i>
 								</span>
-								<h4 class="text-section">Componentes</h4>
+								<h4 class="text-section">Módulos</h4>
 							</li>
 
-
-							<li class="nav-item {% if segment == 'surveys' %} active {% endif %}">
-								<a data-toggle="collapse" href="#submenu">
-									<i class="fas fa-list-ol"></i>
-									<p>Encuestas</p>
-									<span class="caret"></span>
+							<li class="nav-item">
+								<a href="{% url 'module_detail' %}">
+									<i class="fas fa-chart-pie"></i>
+									<p>Phishing</p>
 								</a>
-								<div class="collapse" id="submenu">
-									<ul class="nav nav-collapse">
-										<li>
-											<a href="{% url 'survey_list' %}">
-												<span class="sub-item">Listado de encuestas</span>
-											</a>
-										</li>
-									</ul>
-								</div>
 							</li>
+
+							<li class="nav-item">
+								<a href="{% url 'module_detail' %}">
+									<i class="fas fa-chart-pie"></i>
+									<p>Malware</p>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a href="{% url 'module_detail' %}">
+									<i class="fas fa-chart-pie"></i>
+									<p>Webs</p>
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a href="">
+									<i class="fas fa-plus"></i>
+								</a>
+							</li>
+
 						</ul>
 					
 					{% endif %}	

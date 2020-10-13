@@ -1,0 +1,214 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Modulo NAME {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+      <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+        <div>
+          <h2 class="text-white pb-2 fw-bold">Modulo phishing</h2>
+          <h5 class="text-white op-7 mb-2">¿Está la empresa totalmente preparada contra el phishing?</h5>
+        </div>
+        <div class="ml-md-auto py-2 py-md-0">
+          <a href="#" class="btn btn-white btn-border btn-round mr-2">Administrar usuarios</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="col-md-10 mr-auto ml-auto mt--4">
+
+
+    <div class="row row-card-no-pd">
+        <div class="col-sm-4 col-md-4">
+            <div class="card card-stats card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-users text-success"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Usuarios</p>
+                                <h4 class="card-title">3400</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <div class="card card-stats card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="far fa-list-alt text-secondary"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Encuestas</p>
+                                <h4 class="card-title">3</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <div class="card card-stats card-round">
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-newspaper text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Artículos</p>
+                                <h4 class="card-title">2</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <div class="card-title">Estado de encuestas</div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+            <table class="table table-hover table-head-bg-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Encuesta</th>
+                        <th scope="col" style="width: 140px !important;">N° preguntas</th>
+                        <th scope="col" style="width: 140px !important;">N° personas</th>
+                        <th scope="col"></th>
+                        <th scope="col" style="width: 130px !important;">Estado</th>
+                        <th scope="col"></th>
+                        <th scope="col" style="width: 300px !important;">% respondido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">1</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">Encuesta con nombre largo phishing</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">15</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">120</a></td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-check fa-lg" style="color: green;"></i></td>
+                        <td>Finalizado</td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;">100%</td>
+                        <td>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-success w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">2</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">Phishing</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">15</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">120</a></td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-times fa-lg" style="color: red;"></i></td>
+                        <td>Cancelado</td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;">25%</td>
+                        <td>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">3</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">Phishing</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">15</a></td>
+                        <td><a href="{% url 'survey_detail' %}" class="h5">120</a></td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-spinner fa-lg" style="color: blue;"></i></td>
+                        <td>En proceso</td>
+                        <td class="text-right" style="width: 5% !important; padding: 0px !important;">50%</td>
+                        <td>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-primary w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="mt-5">
+        <div class="card card-post card-round">
+            <img class="card-img-top" src="/static/assets/img/decorariva.png" alt="Card image cap">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="avatar">
+                        <img src="/static/assets/img/cybertrust_candado.png" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="info-post ml-2">
+                        <p class="username">María José</p>
+                        <p class="date text-muted">15 oct 2020</p>
+                    </div>
+                </div>
+                <div class="separator-solid"></div>
+                <h3 class="card-title">
+                    <a href="#">
+                        Phishing de internet
+                    </a>
+                </h3>
+                <p class="card-text">¿Encuentras que tu empresa este preparada para el phishing?</p>
+                <a href="#" class="btn btn-primary btn-rounded btn-sm">Sigue leyendo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div class="card card-post card-round">
+            <img class="card-img-top" src="/static/assets/img/decorariva.png" alt="Card image cap">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="avatar">
+                        <img src="/static/assets/img/cybertrust_candado.png" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="info-post ml-2">
+                        <p class="username">María José</p>
+                        <p class="date text-muted">15 oct 2020</p>
+                    </div>
+                </div>
+                <div class="separator-solid"></div>
+                <h3 class="card-title">
+                    <a href="#">
+                        Phishing de internet
+                    </a>
+                </h3>
+                <p class="card-text">¿Encuentras que tu empresa este preparada para el phishing?</p>
+                <a href="#" class="btn btn-primary btn-rounded btn-sm">Sigue leyendo</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock content %}
+
+
+{% block javascripts %} {% endblock javascripts %}
