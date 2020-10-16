@@ -120,3 +120,31 @@ time.icon:hover, time.icon:focus
   80%  { transform: rotate(6deg)  skewY(-2deg); }
   100% { transform: rotate(0deg)  skewY(0deg); }
 }
+
+#table_module tr[disabled]{
+  filter: blur(0.8px);
+  pointer-events: none;
+  background-color: rgb(240, 240, 240);
+}
+
+
+.spinner{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:3px solid blue;
+  background:transparent;
+  border-top-color:#efef;
+  border-bottom-color: #efef;
+  border-left-color: blue;
+  animation:spin 5s linear infinite;
+  position:relative;
+}
+
+@keyframes spin{
+  0%{
+    background:transparent;
+    transform: rotate(720deg); 
+  }
+
+}

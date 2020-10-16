@@ -33,3 +33,10 @@ def survey_detail(request):
     context = {}
     context['segment'] = 'surveys'
     return render(request, 'survey_detail.html', context=context)
+
+
+
+@login_required(login_url='login')
+def module(request):
+
+    return render(request, 'organizers_templates/module.html')
