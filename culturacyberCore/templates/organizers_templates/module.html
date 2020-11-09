@@ -4,8 +4,6 @@
 
 {% block stylesheets %} {% endblock stylesheets %}
 
-
-
 {% block content %}
 
 <div class="page-inner">
@@ -45,27 +43,40 @@
                     <tr class="mainactivity">
                         <td>1</td>
                         <td>Actividad 1</td>
-                        <td><select name="estado" id="" class="form-group">
-                            <option value="CYBERTRUST SUBIENDO MATERIAL FINAL" selected>CYBERTRUST SUBIENDO MATERIAL FINAL</option>
-                            <option value="ESPERANDO REVISION DEL CLIENTE">ESPERANDO REVISION DEL CLIENTE</option>
-                            <option value="CYBERTRUST CORRIGIENDO MATERIAL">CYBERTRUST CORRIGIENDO MATERIAL</option>
-                        </select>
-                        <button class="btn btn-sm btn-secondary">
-                            Actualizar
-                        </button></td>
+                        <td class="h3 text-success"><i class="far fa-check-square fa-lg" style="color: green;"></i> FINALIZADO</td>
                         <td>25/10/2020</td>
-                        <td><center><div class="spinner"></div></center></td>
+                        <td><center><i class="fas fa-download fa-2x"></i></center></td>
                     </tr>
 
-                    <tr class="secactivity" style="display: none; color: #043353 !important;">
-                        <td colspan="5" style="padding: 0 !important;">
+                    <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
+                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #4aa4e0 !important; border-right: 1px solid #4aa4e0 !important; border-bottom: 1px solid #4aa4e0 !important;">
                             <div class="row">
-                                <div class="col-md-4 p-3" style="text-align: justify;"><h3>Descripción de la actividad:</h3><br><p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p></div>
-                                <div class="col-md-8">
-                                    <table style="width: 100%;">
+                                <div class="col-md-3 p-3 ml-auto mr-auto" style="text-align: justify;">
+                                    <h3>Descripción de la actividad:</h3>
+                                    <p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p>
+                                    <center style="margin-top: 30px;">
+                                        <button class="btn" style="background-color: #a09cd8; margin-right: 10px;"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></button>
+                                        <div class="btn-group dropdown">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                <span class="btn-label">
+                                                    <i class="fa fa-cog"></i>
+                                                    Administrar
+                                                </span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <input value="Finalizar"  class="dropdown-item" />
+                                                    <input value="Subir documento"  class="dropdown-item" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </center>
+                                </div>
+                                <div class="col-md-7 ml-auto mr-auto">
+                                    <table style="width: 100%; margin-bottom: 30px !important">
                                         <tr>
                                             <thead>
-                                                <tr>
+                                                <tr style="background-color: unset !important;">
                                                     <th width="3%"></th>
                                                     <th style="color: #575962 !important;">Proceso</th>
                                                     <th style="color:#575962 !important;">Fecha actualización</th>
@@ -74,8 +85,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: blue;"></i></td>       
+                                                    <td colspan="2"><div class="form-group" style="padding: 0 !important;"><input type="text" placeholder="Ingresar nuevo estado" class="form-control form-control-sm"></div></td>
+                                                </tr>
+                                                <tr>
                                                     <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
-                                                    <td>Revisión</td>
+                                                    <td>CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
                                                     <td>25/10/2020</td>
                                                     <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
                                                 </tr>
@@ -84,13 +99,13 @@
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
                                                     <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
-                                                </tr>
+                                                </tr>          
                                                 <tr>
                                                     <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
-                                                    <td>Creación</td>
+                                                    <td>Revisión</td>
                                                     <td>25/10/2020</td>
                                                     <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
-                                                </tr>
+                                                </tr>                         
                                             </tbody>
                                         </tr>
                                     </table>
@@ -98,55 +113,85 @@
                             </div>
                         </td>
                     </tr>
-
                     <tr class="mainactivity">
-                        <td>1</td>
-                        <td>Actividad 1</td>
+                        <td>2</td>
+                        <td>Actividad 2</td>
                         <td class="h3">CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
                         <td>25/10/2020</td>
                         <td><center><div class="spinner"></div></center></td>
                     </tr>
 
-                    <tr class="secactivity" style="display: none; color: #043353 !important;">
-                        <td colspan="5" style="padding: 0 !important;">
+                    <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
+                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #4aa4e0 !important; border-right: 1px solid #4aa4e0 !important; border-bottom: 1px solid #4aa4e0 !important;">
                             <div class="row">
-                                <div class="col-md-4 p-3" style="text-align: justify;"><h3>Descripción de la actividad:</h3><br><p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p><br><center><button class="btn btn-sm btn-info">Ver demo</button></center></div>
-                                <div class="col-md-8">
-                                    <table style="width: 100%;">
+                                <div class="col-md-3 p-3 ml-auto mr-auto" style="text-align: justify;">
+                                    <h3>Descripción de la actividad:</h3>
+                                    <p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p>
+                                    <center style="margin-top: 30px;">
+                                        <button class="btn" style="background-color: #a09cd8; margin-right: 10px;"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></button>
+                                        <div class="btn-group dropdown">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                <span class="btn-label">
+                                                    <i class="fa fa-cog"></i>
+                                                    Administrar
+                                                </span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <input value="Finalizar"  class="dropdown-item" />
+                                                    <input value="Subir documento"  class="dropdown-item" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </center>
+                                </div>
+                                <div class="col-md-7 ml-auto mr-auto">
+                                    <table style="width: 100%; margin-bottom: 30px !important">
                                         <tr>
                                             <thead>
-                                                <tr>
+                                                <tr style="background-color: unset !important;">
                                                     <th width="3%"></th>
                                                     <th style="color: #575962 !important;">Proceso</th>
                                                     <th style="color:#575962 !important;">Fecha actualización</th>
-                                                    
+                                                    <th width="3%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
-                                                    <td>Revisión</td>
+                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: blue;"></i></td>       
+                                                    <td colspan="2"><div class="form-group" style="padding: 0 !important;"><input type="text" placeholder="Ingresar nuevo estado" class="form-control form-control-sm"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center"><i class="far far fa-minus-square fa-2x" style="color: gray;"></i></td>
+                                                    <td>CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
                                                     <td>25/10/2020</td>
-                                                    
+                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    
-                                                </tr>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                </tr>          
                                                 <tr>
                                                     <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
-                                                    <td>Creación</td>
+                                                    <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    
-                                                </tr>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                </tr>                         
                                             </tbody>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </td>
+                    </tr>
+                    <tr class="mainactivity" disabled>
+                        <td>3</td>
+                        <td>Actividad 3</td>
+                        <td class="h3">CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
+                        <td>25/10/2020</td>
+                        <td><center><div class=""></div></center></td>
                     </tr>
 
                 </tbody>
