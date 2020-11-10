@@ -43,21 +43,21 @@
                     <tr class="mainactivity">
                         <td>1</td>
                         <td>Actividad 1</td>
-                        <td class="h3 text-success"><i class="far fa-check-square fa-lg" style="color: green;"></i> FINALIZADO</td>
+                        <td class="h3 text-success"><i class="far fa-check-square fa-lg" style="color: #31ce36;"></i> FINALIZADO</td>
                         <td>25/10/2020</td>
-                        <td><center><i class="fas fa-download fa-2x"></i></center></td>
+                        <td><center><i class="fas fa-download fa-2x" style="color:#1572e8;"></i></center></td>
                     </tr>
 
                     <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
-                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #4aa4e0 !important; border-right: 1px solid #4aa4e0 !important; border-bottom: 1px solid #4aa4e0 !important;">
+                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #48abf7 !important; border-right: 1px solid #48abf7 !important; border-bottom: 1px solid #48abf7 !important;">
                             <div class="row">
                                 <div class="col-md-3 p-3 ml-auto mr-auto" style="text-align: justify;">
                                     <h3>Descripción de la actividad:</h3>
                                     <p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p>
                                     <center style="margin-top: 30px;">
-                                        <button class="btn" style="background-color: #a09cd8; margin-right: 10px;"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></button>
-                                        <div class="btn-group dropdown">
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <a class="btn mb-2 mr-2" style="background-color: #a09cd8;" href="https://teams.microsoft.com/l/file/49D5C7B0-B7FD-43C9-8DDA-92C23AACF918?tenantId=657df22a-0fc4-4de0-b390-6cfe1ce48d0c&fileType=docx&objectUrl=https%3A%2F%2Fcybertrustcl.sharepoint.com%2Fsites%2Ftest464%2FDocumentos%20compartidos%2FGeneral%2Ftest.docx&baseUrl=https%3A%2F%2Fcybertrustcl.sharepoint.com%2Fsites%2Ftest464&serviceName=teams&threadId=19:f88c7d4726b841c3b1c2b6be1ada9941@thread.tacv2&groupId=1aee35d6-a825-4b8a-9c51-62b3c9c2befc" target="_blank"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></a>
+                                        <div class="btn-group dropdown mb-2">
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                                 <span class="btn-label">
                                                     <i class="fa fa-cog"></i>
                                                     Administrar
@@ -80,31 +80,66 @@
                                                     <th width="3%"></th>
                                                     <th style="color: #575962 !important;">Proceso</th>
                                                     <th style="color:#575962 !important;">Fecha actualización</th>
+                                                    <th width="25%"></th>
                                                     <th width="3%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: blue;"></i></td>       
-                                                    <td colspan="2"><div class="form-group" style="padding: 0 !important;"><input type="text" placeholder="Ingresar nuevo estado" class="form-control form-control-sm"></div></td>
+                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: #48abf7;"></i>Crear</td>    
+                                                    <td ><input type="text" placeholder="Ingresar nuevo estado" class="form-control form-control-sm"></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" value="">
+                                                                <span class="form-check-sign">Cyber</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" value="">
+                                                                <span class="form-check-sign">Cliente</span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
+                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: #31ce36;"></i></td>
                                                     <td>CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-icon btn-round btn-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
+                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: #31ce36;"></i></td>
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-icon btn-round btn-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>          
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
+                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: #31ce36;"></i></td>
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-icon btn-round btn-success">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>                         
                                             </tbody>
                                         </tr>
@@ -122,15 +157,15 @@
                     </tr>
 
                     <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
-                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #4aa4e0 !important; border-right: 1px solid #4aa4e0 !important; border-bottom: 1px solid #4aa4e0 !important;">
+                        <td colspan="5" style="padding: 0 !important; border-left: 1px solid #48abf7 !important; border-right: 1px solid #48abf7 !important; border-bottom: 1px solid #48abf7 !important;">
                             <div class="row">
                                 <div class="col-md-3 p-3 ml-auto mr-auto" style="text-align: justify;">
                                     <h3>Descripción de la actividad:</h3>
                                     <p>Integer id eros sed urna porttitor molestie sit amet vel ligula. Suspendisse sed justo ultricies, cursus elit eu, laoreet mauris. Nunc congue tristique massa non lobortis. Etiam et pulvinar tellus.</p>
                                     <center style="margin-top: 30px;">
-                                        <button class="btn" style="background-color: #a09cd8; margin-right: 10px;"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></button>
-                                        <div class="btn-group dropdown">
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        <a class="btn mb-2 mr-2" style="background-color: #a09cd8;" href="https://teams.microsoft.com/l/file/49D5C7B0-B7FD-43C9-8DDA-92C23AACF918?tenantId=657df22a-0fc4-4de0-b390-6cfe1ce48d0c&fileType=docx&objectUrl=https%3A%2F%2Fcybertrustcl.sharepoint.com%2Fsites%2Ftest464%2FDocumentos%20compartidos%2FGeneral%2Ftest.docx&baseUrl=https%3A%2F%2Fcybertrustcl.sharepoint.com%2Fsites%2Ftest464&serviceName=teams&threadId=19:f88c7d4726b841c3b1c2b6be1ada9941@thread.tacv2&groupId=1aee35d6-a825-4b8a-9c51-62b3c9c2befc" target="_blank"><span class="btn-label" style="color: #fff !important;"><img src="static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></a>
+                                        <div class="btn-group dropdown mb-2">
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                                 <span class="btn-label">
                                                     <i class="fa fa-cog"></i>
                                                     Administrar
@@ -158,26 +193,26 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: blue;"></i></td>       
+                                                    <td class="text-center"><i class="far far fa-plus-square fa-2x" style="color: #48abf7;"></i></td>       
                                                     <td colspan="2"><div class="form-group" style="padding: 0 !important;"><input type="text" placeholder="Ingresar nuevo estado" class="form-control form-control-sm"></div></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-center"><i class="far far fa-minus-square fa-2x" style="color: gray;"></i></td>
                                                     <td>CYBERTRUST SUBIENDO EL DOCUMENTO FINAL</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
+                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: #31ce36;"></i></td>
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>          
                                                 <tr>
-                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: green;"></i></td>
+                                                    <td class="text-center"><i class="far fa-check-square fa-2x" style="color: #31ce36;"></i></td>
                                                     <td>Revisión</td>
                                                     <td>25/10/2020</td>
-                                                    <td><i class="fas fa-trash fa-lg" style="color: red;"></i></td>
+                                                    <td><i class="fas fa-trash fa-lg" style="color: #f25961;"></i></td>
                                                 </tr>                         
                                             </tbody>
                                         </tr>

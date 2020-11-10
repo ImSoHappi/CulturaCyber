@@ -132,11 +132,11 @@ time.icon:hover, time.icon:focus
   width:30px;
   height:30px;
   border-radius:50%;
-  border:3px solid blue;
+  border:3px solid #48abf7;
   background:transparent;
-  border-top-color:#efef;
-  border-bottom-color: #efef;
-  border-left-color: blue;
+  border-top-color:#fff;
+  border-bottom-color: #fff;
+  border-left-color: #48abf7;
   animation:spin 5s linear infinite;
   position:relative;
 }
@@ -148,4 +148,3 @@ time.icon:hover, time.icon:focus
   }
 
 }
-
