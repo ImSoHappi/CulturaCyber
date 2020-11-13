@@ -1,0 +1,117 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Listado de clientes: {{ segment }}{% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+<div class="page-inner">
+
+    <div class="page-header">
+        <h4 class="page-title">Listado de clientes: {{ segment }} </h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="{% url 'redirector' %}">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+        </ul>
+    </div>
+
+<div class="row mt-5">
+
+    {% for client in active_client %}
+    <div class="col-md-3">
+        <div class="card card-profile"  style="height: 450px !important;">
+            <div class="card-header bg-primary-gradient">
+                <i class="far fa-check-circle text-success fa-3x pull-right" id="iconhover" data-original-title="Deshabilitar modulo" data-toggle="tooltip"></i>
+                <div class="profile-picture">
+                    <div class="avatar avatar-xl">
+                        <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="user-profile text-center">
+                    <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
+                    <div class="desc">{{ client.description }}</div>
+            
+                    <div class="view-profile">
+                        <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-primary btn-block">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row user-stats text-center">
+                    <div class="col">
+                        <div class="number">125</div>
+                        <div class="title">Actividades</div>
+                    </div>
+                    <div class="col">
+                        <div class="number">25</div>
+                        <div class="title">Encuestas</div>
+                    </div>
+                    <div class="col">
+                        <div class="number">134</div>
+                        <div class="title">Tareas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for client in disable_client %}
+    <div class="col-md-3">
+        <div class="card card-profile" style="background-color: #1571e81e; height: 450px !important;">
+            <div class="card-header" style="background-color:rgb(118, 149, 206);">
+                <i class="far fa-circle text-primary fa-3x pull-right" id="iconhover" data-original-title="Habilitar modulo" data-toggle="tooltip"></i>
+                <div class="profile-picture">
+                    <div class="avatar avatar-xl">
+                        <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="user-profile text-center">
+                    <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
+                    <div class="desc text-dark">{{ client.description }}</div>
+            
+                    <div class="view-profile">
+                        <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row user-stats text-center">
+                    <div class="col">
+                        <div class="number">125</div>
+                        <div class="title">Actividades</div>
+                    </div>
+                    <div class="col">
+                        <div class="number">25</div>
+                        <div class="title">Encuestas</div>
+                    </div>
+                    <div class="col">
+                        <div class="number">134</div>
+                        <div class="title">Tareas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+    
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %} 
+{% endblock javascripts %}

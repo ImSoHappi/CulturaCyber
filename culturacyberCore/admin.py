@@ -3,5 +3,6 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(MainactivityModel)
-admin.site.register(ActivityrecordModel)
+admin.site.register(moduleModel)
+admin.site.register(activityModel)
+admin.site.register(taskModel)

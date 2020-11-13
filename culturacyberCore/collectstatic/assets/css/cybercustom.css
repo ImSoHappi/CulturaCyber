@@ -148,3 +148,7 @@ time.icon:hover, time.icon:focus
   }
 
 }
+
+#iconhover:hover{
+  color: white !important;
+}

@@ -1,0 +1,208 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{ segment }} {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+<div class="page-inner">
+
+    <div class="page-header">
+        <h4 class="page-title">Módulo: {{ segment }}</h4>
+        <ul class="breadcrumbs">
+            <li class="nav-home">
+                <a href="{% url 'redirector' %} ">
+                    <i class="flaticon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="flaticon-right-arrow"></i>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="card" style="user-select: none;">
+        <div class="card-header">
+            <div class="card-title">Estado de actividades</div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover" id="table_module">
+                <thead>
+                    <tr style="background-color: #48abf7 !important; color: #fff;">
+                        <th scope="col" width="3%">#</th>
+                        <th scope="col">Actividad</th>
+                        <th scope="col">Estado actual</th>
+                        <th scope="col">Fecha programada</th>
+                        <th scope="col" width="3%">Documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for activity in my_activity %}
+                        <tr class="mainactivity" {% if activity.activity_status == 2 %} disabled {% endif %}>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ activity.name }}</td>
+                            
+                            {% if activity.activity_status == 0 %}<td class="text-success"><i class="far fa-check-square fa-lg"> Finalizado</i></td>{% endif %}
+                            {% if activity.activity_status == 1 %}<td class="text-primary"><i class="far fa-square fa-lg"></i> En Proceso</td>{% endif %}
+                            {% if activity.activity_status == 2 %}<td class="text-muted"><i class="far fa-hourglass fa-lg"></i> En Espera</i></td>{% endif %}
+
+                            <td>{{ activity.programmed_date }}</td>
+                            <td><center><i class="fas fa-download fa-2x" style="color:#1572e8;"></i></center></td>
+                        </tr>
+                    
+                        <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
+                            <td colspan="5" style="padding: 0 !important; border-left: 1px solid #48abf7 !important; border-right: 1px solid #48abf7 !important; border-bottom: 1px solid #48abf7 !important;">
+                                <div class="row">
+                                    <div class="col-md-4" style="text-align: justify;">
+                                        <h3 class="ml-3 mt-4 mr-3">Descripción de la actividad:</h3>
+                                        <div class="card-body">
+                                            <p>{{ activity.description }}</p>
+                                            <center class="mt-5">
+                                                <a class="btn mb-2 mr-2" style="background-color: #C98BDB;" href="{{ activity.teamslink }}" target="_blank"><span class="btn-label" style="color: #fff !important;"><img src="/static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></a>
+                                            </center>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-8 pl-0">
+                                        <table style="width: 100%; margin-bottom: 30px !important;">
+                                            
+                                                <thead>
+                                                    <tr style="background-color: unset !important;">
+                                                        <th width="5%"><center>Estado</center></th>
+                                                        <th>Proceso</th>
+                                                        <th>Fecha actualización</th>
+                                                        <th><center>Opciones</center></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {% for task in tasks %}
+                                                        {% ifequal task.activity activity %}
+                                                            <tr>
+                                                                {% if task.task_status == 0 %}<td class="text-success"><center><i class="far fa-check-circle fa-2x" data-original-title="Terminado" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                {% if task.task_status == 1 %}<td class="text-primary"><center><i class="far fa-circle fa-2x" data-original-title="En Proceso" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                {% if task.task_status == 2 %}<td class="text-warning"><center><i class="far fa-question-circle fa-2x" data-original-title="Corregido" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
+
+                                                                <td>{{ task.name }}</td>
+                                                                <td>{{ task.updated_at }}</td>
+                                                                <td>
+                                                                    <center>
+                                                                        <i class="fas fa-ellipsis-h fa-lg" data-toggle="dropdown" style="cursor: pointer;"></i>
+                                                                        <ul class="dropdown-menu" role="menu">
+                                                                            <li>
+                                                                                <form method="POST">
+                                                                                    {% csrf_token %}
+                                                                                    <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">
+                                                                                    <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                    <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" /> 
+                                                                                </form>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </center>
+                                                                </td>
+                                                            </tr>
+                                                        {% endifequal %}  
+                                                    {% endfor %}   
+
+                                                </tbody>
+                                                
+                                           
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}  
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr width="90%" class="mt-5 mb-5">
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Estado de encuestas</div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-head-bg-info">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Encuesta</th>
+                            <th scope="col" style="width: 140px !important;">N° preguntas</th>
+                            <th scope="col" style="width: 140px !important;">N° personas</th>
+                            <th scope="col"></th>
+                            <th scope="col" style="width: 130px !important;">Estado</th>
+                            <th scope="col"></th>
+                            <th scope="col" style="width: 300px !important;">% respondido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="" class="h5">1</a></td>
+                            <td><a href="" class="h5">Encuesta con nombre largo phishing</a></td>
+                            <td><a href="" class="h5">15</a></td>
+                            <td><a href="" class="h5">120</a></td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-check fa-lg" style="color: green;"></i></td>
+                            <td>Finalizado</td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;">100%</td>
+                            <td>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-success w-100" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="" class="h5">2</a></td>
+                            <td><a href="" class="h5">Phishing</a></td>
+                            <td><a href="" class="h5">15</a></td>
+                            <td><a href="" class="h5">120</a></td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-times fa-lg" style="color: red;"></i></td>
+                            <td>Cancelado</td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;">25%</td>
+                            <td>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="" class="h5">3</a></td>
+                            <td><a href="" class="h5">Phishing</a></td>
+                            <td><a href="" class="h5">15</a></td>
+                            <td><a href="" class="h5">120</a></td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;"><i class="fas fa-spinner fa-lg" style="color: blue;"></i></td>
+                            <td>En proceso</td>
+                            <td class="text-right" style="width: 5% !important; padding: 0px !important;">50%</td>
+                            <td>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-primary w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block javascripts %} 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".mainactivity").click(function (e) {
+            $(this).closest("tr").next(".secactivity").toggle();
+        });
+    });
+</script>
+{% endblock javascripts %}

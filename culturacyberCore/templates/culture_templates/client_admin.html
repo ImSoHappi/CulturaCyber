@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Administracion de clientes {% endblock title %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Administracion de clientes</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="{% url 'redirector' %}">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mt-3">
+                <div class="card">
+                    <div class="card-header bg-secondary-gradient">
+                        <div class="card-title fw-mediumbold text-white">Listado de clientes</div>
+                    </div>
+                    <div class="card-body sidebar-wrapper scrollbar scrollbar-inner" style="max-height: 600px !important; overflow: auto;">
+                        <div class="card-list">
+                            {% for client in client_list %}
+                                <div class="item-list">
+                                    <div class="avatar">
+                                        <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="info-user ml-3">
+                                        <div class="username">{{ client.name }}</div>
+                                        <div class="status">{{ client.description }}</div>
+                                    </div>
+
+                                    {% if client.disabled %}
+                                        <button class="btn btn-icon btn-danger btn-round btn-md mr-1" data-original-title="Desactivado" data-toggle="tooltip">                  
+                                            <i class="fas fa-times fa-lg"></i>
+                                        </button>
+                                    {% else %}
+                                        <button class="btn btn-icon btn-success btn-round btn-md mr-1" data-original-title="Activado" data-toggle="tooltip">                  
+                                            <i class="fas fa-check fa-lg"></i>
+                                        </button>
+                                    {% endif %}
+
+                                    <button class="btn btn-icon btn-primary btn-round btn-md" data-original-title="Editar" data-toggle="tooltip" onclick="open_modal('{% url 'client_edit' client=client.uuid %}')">                  
+                                        <i class="far fa-edit fa-lg"></i>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="col-md-6 mt-3">
+                <div class="card" style="max-height: 600px !important; overflow: auto;">
+                    <div class="card-header bg-secondary-gradient">
+                        <div class="card-title text-white">Crear cliente</div>
+                    </div>
+                    <div class="card-body col-md-10 ml-auto mr-auto">
+                        <div class="form-group">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Crear" name="add_client" onsubmit="setFormSubmitting()" class="btn btn-success pull-right" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade col-md-4 ml-auto mr-auto" id="edit" role="dialog">
+
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function open_modal(url){
+        $('#edit').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock javascripts %}

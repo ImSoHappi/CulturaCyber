@@ -1,110 +1,123 @@
-		<!-- Sidebar -->
-		<div class="sidebar sidebar-style-2" data-background-color="bg">
-					
-			<div class="sidebar-wrapper scrollbar scrollbar-inner">
-				<div class="sidebar-content">
-				
-					{% if user.is_authenticated %}
+<!-- Sidebar -->
+<div class="sidebar sidebar-style-2" data-background-color="bg">
+			
+	<div class="sidebar-wrapper scrollbar scrollbar-inner">
+		<div class="sidebar-content">
+		
+			{% if user.is_authenticated %}
 
-						<div class="user">
-							<div class="avatar-sm float-left mr-2">
-								<img src="/static/assets/img/user.png" alt="..." class="avatar-img rounded-circle">
-							</div>
-							<div class="info">
-								<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-									<span>
-										{{ request.user.user }}
-										<span class="user-level">
-										{{ request.user.email }}  
-										</span>
-										<span class="caret"></span>
-									</span>
-								</a>
-								
-								<div class="collapse in" id="collapseExample">
-									<ul class="nav">
-										<li>
-											<a href={% url 'logout' %}>
-												<span class="link-collapse">Desconectarse</span>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+				<div class="user">
+					<div class="avatar-sm float-left mr-2">
+						<img src="/static/assets/img/user.png" alt="..." class="avatar-img rounded-circle">
+					</div>
+					<div class="info">
+						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+							<span>
+								{{ request.user }}
+								<span class="user-level">
+								{{ request.user.extend.email }}  
+								</span>
+								<span class="caret"></span>
+							</span>
+						</a>
 						
-						<ul class="nav nav-primary">
-
-							<li class="nav-item {% if segment == 'home' %} active {% endif %}">
-								<a href="{% url 'home' %}">
-									<i class="fas fa-home"></i>
-									<p>Menu principal</p>
-								</a>
-							</li>
-
-							{% if request.user.name == admin %}
-
-							<li class="nav-section">
-								<span class="sidebar-mini-icon">
-									<i class="fa fa-ellipsis-h"></i>
-								</span>
-								<h4 class="text-section">Administración</h4>
-							</li>
-
-							<li class="nav-item {% if segment == 'admin' %} active {% endif %}">
-
-								<a data-toggle="collapse" href="#submenuadmin">
-									<i class="fas fa-list-ol"></i>
-									<p>Administrar</p>
-									<span class="caret"></span>
-								</a>
-								<div class="collapse" id="submenuadmin">
-									<ul class="nav nav-collapse">
-										<li>
-
-											<a href="{% url 'add_survey' %}">
-												<span class="sub-item">Crear encuestas</span>
-											</a>
-											
-										</li>
-									</ul>
-								</div>
-							</li>
-							
-							{% endif %}
-
-							<li class="nav-section">
-								<span class="sidebar-mini-icon">
-									<i class="fa fa-ellipsis-h"></i>
-								</span>
-								<h4 class="text-section">Mis módulos</h4>
-							</li>
-
-							<li class="nav-item">
-								<a href="{% url 'module' %}">
-									<i class="fas fa-fish"></i>
-									<p>Phishing</p>
-								</a>
-							</li>
-
-							<li class="nav-item">
-								<a href="{% url 'module' %}">
-									<i class="fas fa-user-secret"></i>
-									<p>Hacking</p>
-								</a>
-							</li>
-
-							<li class="nav-item">
-								<a href="">
-									<i class="fas fa-plus"></i>
-								</a>
-							</li>
-
-						</ul>
-					
-					{% endif %}	
-
+						<div class="collapse in" id="collapseExample">
+							<ul class="nav">
+								<li>
+									<a href={% url 'logout' %}>
+										<span class="link-collapse">Desconectarse</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-			</div>
+				
+				<ul class="nav nav-primary">
+
+					<li class="nav-item {% if segment == 'home' %} active {% endif %}">
+						<a href="{% url 'redirector' %}">
+							<i class="fas fa-home"></i>
+							<p>Menu principal</p>
+						</a>
+					</li>
+
+
+					{% if request.user.extend.is_cultureteam %}
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Administración</h4>
+						</li>
+
+						<li class="nav-item {% if segment == 'admin' %} active {% endif %}">
+
+							<a data-toggle="collapse" href="#submenuadmin">
+								<i class="fas fa-list-ol"></i>
+								<p>Administrar</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="submenuadmin">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'client_admin' %}">
+											<i class="fas fa-user-cog"></i>
+											<span class="sub-item">Clientes</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Módulos</h4>
+						</li>
+
+						{% for module in modules_list %}
+							<li class="nav-item {% if segment == module %} active {% endif %}">
+								<a href="{% url 'module_client_list' module=module.uuid %}">
+									<i class="{{ module.icon }}"></i>
+									<p>{{ module.name }}</p>
+								</a>
+							</li>
+						{% endfor %}
+
+						<li class="nav-item">
+							<a href="">
+								<i class="fas fa-plus"></i>
+							</a>
+						</li>
+
+					{% endif %}	
+					
+
+					{% if request.user.extend.is_organizer %}
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Mis módulos</h4>
+						</li>
+
+						{% for module in my_modules %}
+							<li class="nav-item {% if segment == module %} active {% endif %}">
+								<a href="{% url 'module_detail' module=module.uuid %}">
+									<i class="{{ module.icon }}"></i>
+									<p>{{ module.name }}</p>
+								</a>
+							</li>
+						{% endfor %}
+					{% endif %}	
+					
+				</ul>
+			{% endif %}	
 		</div>
-		<!-- End Sidebar -->
+	</div>
+</div>
+<!-- End Sidebar -->
