@@ -47,7 +47,6 @@ class activityModel(models.Model):
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE)
     description = models.TextField(max_length=400)
     activity_status = models.IntegerField(choices = ACTIVITY_STATUS, default=2)
-    teamslink = models.TextField()
     programmed_date = models.DateField()
 
     def __str__(self):
@@ -66,6 +65,15 @@ class activityModel(models.Model):
 
         if flag:
             return "finish"
+
+    def first_activity(module, client):
+        flag = True
+        if activityModel.objects.filter(module=module, client=client):
+            flag = False
+        return flag
+
+    def get_activity(activity):
+        return activityModel.objects.get(pk=activity)
 
 class taskModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

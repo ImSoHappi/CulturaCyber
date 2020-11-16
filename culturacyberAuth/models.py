@@ -31,6 +31,7 @@ class clientModel(models.Model):
 
     name = models.CharField(max_length = 50)
     description = models.TextField(max_length=100)
+    teamslink = models.TextField()
 
     def __str__(self):
         return self.name
@@ -45,7 +46,7 @@ class clientModel(models.Model):
         activities = activityModel.objects.filter(client=client, module=module)
         return taskModel.objects.filter(activity__in=activities)
 
-    def client_list():
+    def all_client_list():
         return clientModel.objects.all()
     
     def get_client(client):

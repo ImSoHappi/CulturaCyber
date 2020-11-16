@@ -36,4 +36,5 @@ def module_detail(request, module):
     context['tasks'] = clientModel.my_tasks(client, module)
     context['segment'] = moduleModel.objects.get(uuid=module)
     context['my_modules'] = clientModel.my_modules(client)
+    context['client'] = client
     return render(request, 'organizer_templates/module.html', context=context)

@@ -168,16 +168,16 @@
         </div>
 
         <div class="card-body row">
-
+            {% for module in my_modules %}
             <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
+                <div class="card" style="height: 250px;">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
+                                <a href="{% url 'module_detail' module=module.uuid %}"><h4><b>{{ module.name }}</b></h4></a>
+                                <p class="text-muted" style="max-height: 100px;   overflow: hidden; text-overflow: ellipsis;">
+                                    {{ module.description }}
+                                </p>
                             </div>
 
                         </div>
@@ -185,130 +185,14 @@
                             <div class="progress-bar bg-info w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
+                            <p class="text-muted mb-0">% de avance</p>
                             <p class="text-muted mb-0">50%</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
-                            </div>
-
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-info w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
-                            <p class="text-muted mb-0">25%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
-                            </div>
-
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
-                            <p class="text-muted mb-0">75%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
-                            </div>
-
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
-                            <p class="text-muted mb-0">75%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
-                            </div>
-
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-success w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
-                            <p class="text-muted mb-0">100%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4><b>Phishing</b></h4></a>
-                                <p class="text-muted">
-
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo mauris, blandit sit amet luctus lacinia, auctor vel lorem. Cras molestie condimentum magna, ut mattis purus sollicitudin eu. In hac. </p>
-                            </div>
-
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Avance</p>
-                            <p class="text-muted mb-0">75%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
-
     </div>
 </div>
 

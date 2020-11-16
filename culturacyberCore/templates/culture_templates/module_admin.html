@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Administración de modulos {% endblock title %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Administración de modulos</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="{% url 'redirector' %}">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card col-md-7 ml-auto mr-auto m-5">
+            <div class="card-header">
+                <div class="card-title">Crear modulo</div>
+            </div>
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Crear" name="add_module" onsubmit="setFormSubmitting()" class="btn btn-success btn-lg pull-right mt-3" />
+                    <a href="https://fontawesome.com/icons?d=gallery" target="_blank" class="btn btn-secondary btn-lg pull-right mt-3 mr-3">Iconos</a>
+                </form>     
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

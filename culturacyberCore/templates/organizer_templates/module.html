@@ -26,6 +26,7 @@
     <div class="card" style="user-select: none;">
         <div class="card-header">
             <div class="card-title">Estado de actividades</div>
+            <a class="btn btn-icon btn-round pull-right mt--4 mr-2 btn-lg" style="background-color: #e09af3;" href="{{ client.teamslink }}" data-original-title="Ir a la carpeta teams" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="23px" height="24px" class="mt-2"></a>
         </div>
         <div class="card-body table-responsive">
             <table class="table table-hover" id="table_module">
@@ -60,9 +61,6 @@
                                         <h3 class="ml-3 mt-4 mr-3">Descripción de la actividad:</h3>
                                         <div class="card-body">
                                             <p>{{ activity.description }}</p>
-                                            <center class="mt-5">
-                                                <a class="btn mb-2 mr-2" style="background-color: #C98BDB;" href="{{ activity.teamslink }}" target="_blank"><span class="btn-label" style="color: #fff !important;"><img src="/static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></a>
-                                            </center>
                                         </div>
 
                                     </div>
@@ -97,6 +95,7 @@
                                                                                 <form method="POST">
                                                                                     {% csrf_token %}
                                                                                     <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">
+                                                                                    <a href="{{ task.teamslink }}" class="dropdown-item" target="_blank">Abrir en teams</a>
                                                                                     <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
                                                                                     <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" /> 
                                                                                 </form>

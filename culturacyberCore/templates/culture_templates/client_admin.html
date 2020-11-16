@@ -26,7 +26,7 @@
                     <div class="card-header bg-secondary-gradient">
                         <div class="card-title fw-mediumbold text-white">Listado de clientes</div>
                     </div>
-                    <div class="card-body sidebar-wrapper scrollbar scrollbar-inner" style="max-height: 600px !important; overflow: auto;">
+                    <div class="card-body" style="max-height: 700px !important; overflow: auto;">
                         <div class="card-list">
                             {% for client in client_list %}
                                 <div class="item-list">
@@ -59,15 +59,32 @@
             </div>
             
             <div class="col-md-6 mt-3">
-                <div class="card" style="max-height: 600px !important; overflow: auto;">
+                <div class="card" style="max-height: 700px !important; overflow: auto;">
                     <div class="card-header bg-secondary-gradient">
                         <div class="card-title text-white">Crear cliente</div>
                     </div>
                     <div class="card-body col-md-10 ml-auto mr-auto">
                         <div class="form-group">
                             <form method="POST">
+                                
                                 {% csrf_token %}
-                                {{ form.as_p }}
+
+                                {{ form.name.label_tag }}
+                                {{ form.name }}
+
+                                {{ form.teamslink.label_tag }}
+                                {{ form.teamslink }}
+
+                                {{ form.description.label_tag }}
+                                {{ form.description }}
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        {{ form.disabled }}
+                                        <span class="form-check-sign"></span>{{ form.disabled.label_tag }}</span>
+                                    </label>
+                                </div>
+
                                 <input type="submit" value="Crear" name="add_client" onsubmit="setFormSubmitting()" class="btn btn-success pull-right" />
                             </form>
                         </div>

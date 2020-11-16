@@ -12,11 +12,21 @@
 
                 <input type="text" name="client_pk" value="{{ client.pk }}" class="form-control" style="display: none;">
 
-                <label for="name" class="mt-3">Nombre del cliente: </label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ client.name }}">
+                {{ form.name.label_tag }}
+                {{ form.name }}
 
-                <label for="description" class="mt-3">Descripción: </label>
-                <textarea name="description" id="description" cols="20" rows="10" class="form-control">{{ client.description }}</textarea>
+                {{ form.teamslink.label_tag }}
+                {{ form.teamslink }}
+
+                {{ form.description.label_tag }}
+                {{ form.description }}
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        {{ form.disabled }}
+                        <span class="form-check-sign"></span>{{ form.disabled.label_tag }}</span>
+                    </label>
+                </div>
 
             </div>
             

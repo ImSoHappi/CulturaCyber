@@ -26,6 +26,10 @@
     <div class="card" style="user-select: none;">
         <div class="card-header">
             <div class="card-title">Estado de actividades</div>
+            <a class="btn btn-icon btn-round pull-right mt--4 mr-2 btn-lg" style="background-color: #e09af3;" href="{{ client.teamslink }}" data-original-title="Ir a la carpeta teams" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="23px" height="24px" class="mt-2"></a>
+            <button class="btn btn-icon btn-success btn-round btn-md pull-right mt--4 mr-2 btn-lg" data-original-title="Añadir actividad" data-toggle="tooltip" onclick="open_modal('{% url 'add_activity' module=segment.uuid client=client.uuid %}')">                  
+                <i class="fas fa-plus fa-lg"></i>
+            </button>
         </div>
         <div class="card-body table-responsive">
             <table class="table table-hover" id="table_module">
@@ -39,88 +43,105 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% if client_activities %}
+                        {% for activity in client_activities %}
+                            <tr class="mainactivity">
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ activity.name }}</td>
+                                
+                                {% if activity.activity_status == 0 %}<td class="text-success"><i class="far fa-check-square fa-lg"> Finalizado</i></td>{% endif %}
+                                {% if activity.activity_status == 1 %}<td class="text-primary"><i class="far fa-square fa-lg"></i> En Proceso</td>{% endif %}
+                                {% if activity.activity_status == 2 %}<td class="text-muted"><i class="far fa-hourglass fa-lg"></i> En Espera</i></td>{% endif %}
 
-                    {% for activity in client_activities %}
-                        <tr class="mainactivity">
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ activity.name }}</td>
-                            
-                            {% if activity.activity_status == 0 %}<td class="text-success"><i class="far fa-check-square fa-lg"> Finalizado</i></td>{% endif %}
-                            {% if activity.activity_status == 1 %}<td class="text-primary"><i class="far fa-square fa-lg"></i> En Proceso</td>{% endif %}
-                            {% if activity.activity_status == 2 %}<td class="text-muted"><i class="far fa-hourglass fa-lg"></i> En Espera</i></td>{% endif %}
+                                <td>{{ activity.programmed_date }}</td>
+                                <td><center><i class="fas fa-download fa-2x" style="color:#1572e8;"></i></center></td>
+                            </tr>
+                        
+                            <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
+                                <td colspan="5" style="padding: 0 !important; border-left: 1px solid #48abf7 !important; border-right: 1px solid #48abf7 !important; border-bottom: 1px solid #48abf7 !important;">
+                                    <div class="row">
+                                        <div class="col-md-4" style="text-align: justify;">
+                                            <h3 class="ml-3 mt-4 mr-3">Descripción de la actividad:</h3>
+                                            <div class="card-body">
+                                                <p>{{ activity.description }}</p>
+                                            </div>
 
-                            <td>{{ activity.programmed_date }}</td>
-                            <td><center><i class="fas fa-download fa-2x" style="color:#1572e8;"></i></center></td>
-                        </tr>
-                    
-                        <tr class="secactivity" style="display: none; color: #043353 !important; background-color: unset !important;">
-                            <td colspan="5" style="padding: 0 !important; border-left: 1px solid #48abf7 !important; border-right: 1px solid #48abf7 !important; border-bottom: 1px solid #48abf7 !important;">
-                                <div class="row">
-                                    <div class="col-md-4" style="text-align: justify;">
-                                        <h3 class="ml-3 mt-4 mr-3">Descripción de la actividad:</h3>
-                                        <div class="card-body">
-                                            <p>{{ activity.description }}</p>
-                                            <center class="mt-5">
-                                                <a class="btn mb-2 mr-2" style="background-color: #C98BDB;" href="{{ activity.teamslink }}" target="_blank"><span class="btn-label" style="color: #fff !important;"><img src="/static/assets/img/teams.svg.webp" alt="" width="20px" height="20px" style="margin-right: 5px;">Teams</span></a>
-                                            </center>
                                         </div>
+                                        <div class="col-md-8 pl-0">
+                                            <table style="width: 100%; margin-bottom: 30px !important;">
+                                                
+                                                    <thead>
+                                                        <tr style="background-color: unset !important;">
+                                                            <th width="5%"><center>Estado</center></th>
+                                                            <th>Proceso</th>
+                                                            <th>Fecha actualización</th>
+                                                            <th><center>Opciones</center></th>
+                                                        </tr>
+                                                    </thead>
 
-                                    </div>
-                                    <div class="col-md-8 pl-0">
-                                        <table style="width: 100%; margin-bottom: 30px !important;">
-                                            
-                                                <thead>
-                                                    <tr style="background-color: unset !important;">
-                                                        <th width="5%"><center>Estado</center></th>
-                                                        <th>Proceso</th>
-                                                        <th>Fecha actualización</th>
-                                                        <th><center>Opciones</center></th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    {% for task in client_tasks %}
-                                                        {% ifequal task.activity activity %}
-                                                            <tr>
-                                                                {% if task.task_status == 0 %}<td class="text-success"><center><i class="far fa-check-circle fa-2x" data-original-title="Terminado" data-toggle="tooltip"></i></center></td>{% endif %}
-                                                                {% if task.task_status == 1 %}<td class="text-primary"><center><i class="far fa-circle fa-2x" data-original-title="En Proceso" data-toggle="tooltip"></i></center></td>{% endif %}
-                                                                {% if task.task_status == 2 %}<td class="text-warning"><center><i class="far fa-question-circle fa-2x" data-original-title="Corregido" data-toggle="tooltip"></i></center></td>{% endif %}
-                                                                {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
-
-                                                                <td>{{ task.name }}</td>
-                                                                <td>{{ task.updated_at }}</td>
-                                                                <td>
+                                                    <tbody>
+                                                        <tr style="background-color: unset !important;">
+                                                            <form method="POST">
+                                                                <td colspan="1">
                                                                     <center>
-                                                                        <i class="fas fa-ellipsis-h fa-lg" data-toggle="dropdown" style="cursor: pointer;"></i>
-                                                                        <ul class="dropdown-menu" role="menu">
-                                                                            <li>
-                                                                                <form method="POST">
-                                                                                    {% csrf_token %}
-                                                                                    <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">
-                                                                                    <input name="activitypk" style="display: none;" type="text" value="{{ activity.pk }}">
-                                                                                    <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
-                                                                                    <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
-                                                                                    <input style="cursor: pointer;" type="submit" value="Corregida" name="corrected_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
-                                                                                    <input style="cursor: pointer;" type="submit" value="Borrar" name="delete_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
-                                                                                </form>
-                                                                            </li>
-                                                                        </ul>
+                                                                        <input type="text" name="activity" value="{{ activity.pk }}" style="display: none;">
+                                                                        <button class="btn btn-icon btn-success btn-round btn-md pull-right mt--4 mr-2 btn-lg" data-original-title="Añadir tarea" data-toggle="tooltip" type="submit" name="add_task" onsubmit="setFormSubmitting()">                  
+                                                                            <i class="fas fa-plus fa-lg"></i>
+                                                                        </button>
                                                                     </center>
                                                                 </td>
-                                                            </tr>
-                                                        {% endifequal %}  
-                                                    {% endfor %}   
+                                                                <td colspan="4">                                                            
+                                                                        {% csrf_token %}
+                                                                        {{ form.as_p }}
+                                                                </td>
+                                                            </form>
+                                                        </tr>
 
-                                                </tbody>
-                                                
-                                           
-                                        </table>
+                                                        {% for task in client_tasks %}
+                                                            {% ifequal task.activity activity %}
+                                                                <tr>
+                                                                    {% if task.task_status == 0 %}<td class="text-success"><center><i class="far fa-check-circle fa-2x" data-original-title="Terminado" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                    {% if task.task_status == 1 %}<td class="text-primary"><center><i class="far fa-circle fa-2x" data-original-title="En Proceso" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                    {% if task.task_status == 2 %}<td class="text-warning"><center><i class="far fa-question-circle fa-2x" data-original-title="Corregido" data-toggle="tooltip"></i></center></td>{% endif %}
+                                                                    {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
+
+                                                                    <td>{{ task.name }}</td>
+                                                                    <td>{{ task.updated_at }}</td>
+                                                                    <td>
+                                                                        <center>
+                                                                            <i class="fas fa-ellipsis-h fa-lg" data-toggle="dropdown" style="cursor: pointer;"></i>
+                                                                            <ul class="dropdown-menu" role="menu">
+                                                                                <li>
+                                                                                    <form method="POST">
+                                                                                        {% csrf_token %}
+                                                                                        <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">
+                                                                                        <input name="activitypk" style="display: none;" type="text" value="{{ activity.pk }}">
+                                                                                        <a href="{{ task.teamslink }}" class="dropdown-item" target="_blank">Abrir en teams</a>
+                                                                                        <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                        <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                        <input style="cursor: pointer;" type="submit" value="Corregida" name="corrected_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                        <input style="cursor: pointer;" type="submit" value="Borrar" name="delete_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                    </form>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </center>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endifequal %}  
+                                                        {% endfor %}   
+
+                                                    </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}  
-
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center" style="font-size: 18px;">No hay actividades aún</td>
+                    </tr>   
+                    {% endif %} 
                 </tbody>
             </table>
         </div>
@@ -197,6 +218,9 @@
     </div>
 </div>
 
+<div class="modal fade col-md-4 ml-auto mr-auto" id="edit" role="dialog">
+
+</div>
 
 {% endblock content %}
 
@@ -209,4 +233,14 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function open_modal(url){
+        $('#edit').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+</script>
+
 {% endblock javascripts %}
