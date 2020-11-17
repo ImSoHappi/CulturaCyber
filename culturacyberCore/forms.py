@@ -12,10 +12,10 @@ class clientForm(forms.ModelForm):
             'disabled': 'Deshabilitar cliente'
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'teamslink': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'disabled': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'teamslink': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'description': forms.Textarea(attrs={'class': 'form-control mb-3'}),
+            'disabled': forms.CheckboxInput(attrs={'class': 'form-check-input mb-3'}),
         }
 
 class moduleForm(forms.ModelForm):

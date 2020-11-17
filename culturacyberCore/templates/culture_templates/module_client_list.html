@@ -28,7 +28,7 @@
     {% if client.disabled  %}
     {% else %}
     <div class="col-md-3">
-        <div class="card card-profile"  style="height: 450px !important;">
+        <div class="card card-profile"  style="height: 470px !important;">
             <div class="card-header bg-primary-gradient">
                 <form action="" method="POST">
                     {% csrf_token %}
@@ -47,7 +47,7 @@
             <div class="card-body">
                 <div class="user-profile text-center">
                     <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
-                    <div class="desc">{{ client.description }}</div>
+                    <div class="desc text-justify">{{ client.description }}</div>
             
                     <div class="view-profile">
                         <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-primary btn-block">Detalles</a>
@@ -79,7 +79,7 @@
         {% if client.disabled  %}
         {% else %}
         <div class="col-md-3">
-            <div class="card card-profile" style="background-color: #1571e81e; height: 450px !important;">
+            <div class="card card-profile" style="background-color: #1571e81e; height: 470px !important;">
                 <div class="card-header" style="background-color:rgb(118, 149, 206);">
                     <form action="" method="POST">
                         {% csrf_token %}
@@ -98,7 +98,7 @@
                 <div class="card-body">
                     <div class="user-profile text-center">
                         <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
-                        <div class="desc text-dark">{{ client.description }}</div>
+                        <div class="desc text-dark text-justify">{{ client.description }}</div>
                 
                         <div class="view-profile">
                             <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>

@@ -22,9 +22,146 @@
         </ul>
     </div>
 
+    <div class="col-md-12 mt-5 card">
+        <div class="card-header text-center">
+            <div class="card-title">Resumen semanal</div>
+        </div>
+        <div  class="card-body row">
+            <div class="px-2 pb-2 pb-md-0 text-center col-md-12 ml-auto mr-auto">
+                <div id="circles-2"><div class="circles-wrp" style="position: relative; display: inline-block;"><svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><path fill="transparent" stroke="#f1f1f1" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 44.942357332570026 3.500040032273624 Z" class="circles-maxValueStroke"></path><path fill="transparent" stroke="#FF9E27" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 20.644357636259837 78.60137921350231 " class="circles-valueStroke"></path></svg><div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 31.5px; height: 90px; line-height: 90px;">5</div></div></div>
+                <h6 class="fw-bold mt-3 mb-0">Tareas en proceso</h6>
+            </div>
+
+            <div class="px-2 pb-2 pb-md-0 text-center col-md-6 ml-auto mr-auto mt--5" id="graphs">
+                <div id="circles-1"><div class="circles-wrp" style="position: relative; display: inline-block;"><svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><path fill="transparent" stroke="#f1f1f1" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 44.942357332570026 3.500040032273624 Z" class="circles-maxValueStroke"></path><path fill="transparent" stroke="#FF9E27" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 20.644357636259837 78.60137921350231 " class="circles-valueStroke"></path></svg><div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 31.5px; height: 90px; line-height: 90px;">5</div></div></div>
+                <h6 class="fw-bold mt-3 mb-0">Tareas rechazadas</h6>
+            </div>
+
+            <div class="px-2 pb-2 pb-md-0 text-center col-md-6 ml-auto mr-auto mt--5" id="graphs">
+                <div id="circles-3"><div class="circles-wrp" style="position: relative; display: inline-block;"><svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><path fill="transparent" stroke="#f1f1f1" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 44.942357332570026 3.500040032273624 Z" class="circles-maxValueStroke"></path><path fill="transparent" stroke="#FF9E27" stroke-width="7" d="M 44.99154756204665 3.500000860767564 A 41.5 41.5 0 1 1 20.644357636259837 78.60137921350231 " class="circles-valueStroke"></path></svg><div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 31.5px; height: 90px; line-height: 90px;">5</div></div></div>
+                <h6 class="fw-bold mt-3 mb-0">Tareas terminadas</h6>
+            </div>
+
+
+            <div class="col-md-4 mt-5">
+                <div class="card-header bg-danger-gradient">
+                    <div class="card-title fw-mediumbold text-white">Tareas rechazadas</div>
+                </div>
+                <div class="card-body" style="max-height: 700px !important; overflow: auto;">
+                    <div class="card-list">
+                        {% for task in rejected_tasks %}
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="info-user ml-3">
+                                    <div class="username">{{ task.name }}<i class="fas fa-external-link-alt text-dark ml-2"></i></div>
+                                    <div class="status">Ultima actualización: {{ task.updated_at }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4 mt-5">
+                <div class="card-header bg-primary-gradient">
+                    <div class="card-title fw-mediumbold text-white">Tareas en proceso</div>
+                </div>
+                <div class="card-body" style="max-height: 400px !important; overflow: auto;">
+                    <div class="card-list">
+                        {% for task in inprocess_tasks %}
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="info-user ml-3">
+                                    <div class="username">{{ task.name }}<i class="fas fa-external-link-alt text-dark ml-2"></i></div>
+                                    <div class="status">Ultima actualización: {{ task.updated_at }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-5">
+                <div class="card-header bg-success-gradient">
+                    <div class="card-title fw-mediumbold text-white">Tareas terminadas</div>
+                </div>
+                <div class="card-body" style="max-height: 400px !important; overflow: auto;">
+                    <div class="card-list">
+                        {% for task in finished_tasks %}
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                                <div class="info-user ml-3">
+                                    <div class="username">{{ task.name }}<i class="fas fa-external-link-alt text-dark ml-2"></i></div>
+                                    <div class="status">Ultima actualización: {{ task.updated_at }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
 
 {% block javascripts %} 
+
+<script>
+    Circles.create({
+    id:'circles-1',
+    radius:70,
+    value:{{ count_rejected }},
+    maxValue:{{ total_task }},
+    width:12,
+    text: {{ count_rejected }},
+    colors:['#f1f1f1', '#e80a15'],
+    duration:400,
+    wrpClass:'circles-wrp',
+    textClass:'circles-text',
+    styleWrapper:true,
+    styleText:true
+})
+
+Circles.create({
+    id:'circles-2',
+    radius:100,
+    value:{{ count_inprocess }},
+    maxValue:{{ total_task }},
+    width:22,
+    text: {{ count_inprocess }},
+    colors:['#f1f1f1', '#177dff'],
+    duration:400,
+    wrpClass:'circles-wrp',
+    textClass:'circles-text',
+    styleWrapper:true,
+    styleText:true
+})
+
+Circles.create({
+    id:'circles-3',
+    radius:70,
+    value:{{ count_finished }},
+    maxValue:{{ total_task }},
+    width:12,
+    text: {{ count_finished }},
+    colors:['#f1f1f1', '#2BB930'],
+    duration:400,
+    wrpClass:'circles-wrp',
+    textClass:'circles-text',
+    styleWrapper:true,
+    styleText:true
+})
+
+</script>
+
 {% endblock javascripts %}

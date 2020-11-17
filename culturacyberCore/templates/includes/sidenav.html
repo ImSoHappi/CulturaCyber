@@ -104,15 +104,21 @@
 							</span>
 							<h4 class="text-section">Mis módulos</h4>
 						</li>
-
-						{% for module in my_modules %}
-							<li class="nav-item {% if segment == module %} active {% endif %}">
-								<a href="{% url 'module_detail' module=module.uuid %}">
-									<i class="{{ module.icon }}"></i>
-									<p>{{ module.name }}</p>
-								</a>
+						{% if my_modules %}
+							{% for module in my_modules %}
+								<li class="nav-item {% if segment == module %} active {% endif %}">
+									<a href="{% url 'module_detail' module=module.uuid %}">
+										<i class="{{ module.icon }}"></i>
+										<p>{{ module.name }}</p>
+									</a>
+								</li>
+							{% endfor %}
+						{% else %}
+							<li class="nav-item text-muted text-center mt-4">
+								<p>No hay modulos cargados aún...</p>
 							</li>
-						{% endfor %}
+						{% endif %}
+						
 					{% endif %}	
 					
 				</ul>

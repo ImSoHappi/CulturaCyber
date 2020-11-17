@@ -7,9 +7,17 @@ from .forms import clientForm, moduleForm, activityForm, taskForm
 @login_required(login_url='login')
 def home(request):
     client = request.user.extend.client
+    print(taskModel.rejected_tasks().count() + taskModel.inprocess_tasks().count() + taskModel.finished_tasks().count())
     context = {}
     context['segment'] = 'home'
     context['modules_list'] = moduleModel.get_all_modules()
+    context['rejected_tasks'] = taskModel.rejected_tasks()
+    context['inprocess_tasks'] = taskModel.inprocess_tasks()
+    context['finished_tasks'] = taskModel.finished_tasks()
+    context['count_finished'] = taskModel.finished_tasks().count()
+    context['count_inprocess'] = taskModel.inprocess_tasks().count()
+    context['count_rejected'] = taskModel.rejected_tasks().count()
+    context['total_task'] = taskModel.rejected_tasks().count() + taskModel.inprocess_tasks().count() + taskModel.finished_tasks().count()
 
     return render(request, 'culture_templates/home.html', context=context)
 

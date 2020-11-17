@@ -8,24 +8,26 @@
         </div>
         <form method="POST">
             {% csrf_token %}
-            <div class="modal-body card-body form-group">
+            <div class="modal-body card-body form-group" style="max-height: 400px; overflow: scroll; overflow-x: hidden;">
 
                 <input type="text" name="client_pk" value="{{ client.pk }}" class="form-control" style="display: none;">
+                <div class="col-md-11 ml-auto mr-auto mt-2">
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
 
-                {{ form.name.label_tag }}
-                {{ form.name }}
+                    {{ form.teamslink.label_tag }}
+                    {{ form.teamslink }}
 
-                {{ form.teamslink.label_tag }}
-                {{ form.teamslink }}
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
 
-                {{ form.description.label_tag }}
-                {{ form.description }}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            {{ form.disabled }}
+                            <span class="form-check-sign"></span>{{ form.disabled.label_tag }}</span>
+                        </label>
+                    </div>
 
-                <div class="form-check">
-                    <label class="form-check-label">
-                        {{ form.disabled }}
-                        <span class="form-check-sign"></span>{{ form.disabled.label_tag }}</span>
-                    </label>
                 </div>
 
             </div>
