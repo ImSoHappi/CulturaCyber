@@ -2,6 +2,7 @@ from django.db import models
 import uuid, random
 from django.db.models import Q
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 # Create your models here.
 
@@ -76,6 +77,9 @@ class activityModel(models.Model):
 
     def get_activity(activity):
         return activityModel.objects.get(pk=activity)
+    
+    def get_activity_by_month(month, year):
+        return activityModel.objects.filter( Q(created_at__year = year) & Q( created_at__month = month))
 
 class taskModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -99,16 +103,18 @@ class taskModel(models.Model):
         return True
 
     def rejected_tasks():
-        today = datetime.now()
+        today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
         return taskModel.objects.filter(task_status=3, created_at__range=[last_monday, today])
 
     def inprocess_tasks():
-        today = datetime.now()
+        today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
         return taskModel.objects.filter( Q(task_status=1) | Q(task_status=2), created_at__range=[last_monday, today] )
 
     def finished_tasks():
-        today = datetime.now()
+        today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
         return taskModel.objects.filter(task_status=0, created_at__range=[last_monday, today])
+
+    

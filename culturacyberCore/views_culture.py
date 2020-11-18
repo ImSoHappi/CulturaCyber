@@ -3,11 +3,27 @@ from django.contrib.auth.decorators import login_required
 from .models import moduleModel, taskModel, activityModel
 from culturacyberAuth.models import clientModel
 from .forms import clientForm, moduleForm, activityForm, taskForm
+from django.utils import timezone
+import datetime
 
 @login_required(login_url='login')
 def home(request):
+
+    graph_today = timezone.now()
+    graph_acitivity_by_month = []
+
+    graph_months_list = []
+    graph_activities = []
+
+    for substract in range(10):
+        target_time = graph_today - datetime.timedelta(substract*365/12)
+        graph_activities.append(activityModel.get_activity_by_month(target_time.month, target_time.year))
+        graph_months_list.append(target_time.strftime("%b %Y"))
+
+    graph_months_list.reverse()
+    graph_activities.reverse()
+
     client = request.user.extend.client
-    print(taskModel.rejected_tasks().count() + taskModel.inprocess_tasks().count() + taskModel.finished_tasks().count())
     context = {}
     context['segment'] = 'home'
     context['modules_list'] = moduleModel.get_all_modules()
@@ -18,6 +34,9 @@ def home(request):
     context['count_inprocess'] = taskModel.inprocess_tasks().count()
     context['count_rejected'] = taskModel.rejected_tasks().count()
     context['total_task'] = taskModel.rejected_tasks().count() + taskModel.inprocess_tasks().count() + taskModel.finished_tasks().count()
+    
+    context['graph_month_list'] = graph_months_list
+    context['graph_activities'] = graph_activities
 
     return render(request, 'culture_templates/home.html', context=context)
 

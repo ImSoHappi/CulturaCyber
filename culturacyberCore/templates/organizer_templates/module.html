@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    {% if my_activity %}
                     {% for activity in my_activity %}
                         <tr class="mainactivity" {% if activity.activity_status == 2 %} disabled {% endif %}>
                             <td>{{ forloop.counter }}</td>
@@ -115,7 +115,12 @@
                                 </div>
                             </td>
                         </tr>
-                    {% endfor %}  
+                    {% endfor %} 
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center" style="font-size: 18px;">No hay actividades aún</td>
+                        </tr>  
+                    {% endif %}
 
                 </tbody>
             </table>

@@ -81,7 +81,7 @@
 						{% for module in modules_list %}
 							<li class="nav-item {% if segment == module %} active {% endif %}">
 								<a href="{% url 'module_client_list' module=module.uuid %}">
-									<i class="{{ module.icon }}"></i>
+									{{ module.icon |safe }}
 									<p>{{ module.name }}</p>
 								</a>
 							</li>
@@ -108,7 +108,7 @@
 							{% for module in my_modules %}
 								<li class="nav-item {% if segment == module %} active {% endif %}">
 									<a href="{% url 'module_detail' module=module.uuid %}">
-										<i class="{{ module.icon }}"></i>
+										{{ module.icon |safe }}
 										<p>{{ module.name }}</p>
 									</a>
 								</li>
