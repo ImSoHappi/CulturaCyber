@@ -38,7 +38,6 @@ class moduleModel(models.Model):
     
     def get_module(module):
         return moduleModel.objects.get(uuid=module)
-    
 
 class activityModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -116,5 +115,23 @@ class taskModel(models.Model):
         today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
         return taskModel.objects.filter(task_status=0, created_at__range=[last_monday, today])
+
+    def get_all_tasks_client(client):
+        activity = activityModel.objects.filter(client=client)
+        return taskModel.objects.filter(activity__in=activity)
+    
+    def get_rejected_module_task(module):
+        activities = activityModel.objects.filter(module=module)
+        return taskModel.objects.filter(activity__in=activities, task_status=3)
+    
+    def get_finished_module_task(module):
+        activities = activityModel.objects.filter(module=module)
+        return taskModel.objects.filter(activity__in=activities, task_status=0)
+
+    def get_inprocess_module_task(module):
+        activities = activityModel.objects.filter(module=module)
+        return taskModel.objects.filter( Q(task_status=1) |  Q(task_status=2), activity__in=activities )
+    
+
 
     

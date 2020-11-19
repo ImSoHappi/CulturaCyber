@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import moduleModel, taskModel, activityModel
 from culturacyberAuth.models import clientModel
 from .forms import clientForm, moduleForm, activityForm, taskForm
+from culturacyberAuth.forms import userForm
 from django.utils import timezone
 import datetime
+from django.contrib.auth.forms import UserCreationForm
 
 @login_required(login_url='login')
 def home(request):
@@ -208,4 +210,15 @@ def add_activity(request, module, client):
     context['form'] = activityForm
 
     return render(request, 'culture_templates/add_activity.html', context=context)
-     
+
+
+@login_required(login_url='login')
+def create_user(request):
+
+    
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+    context['form_user'] = userForm
+    context['form'] = UserCreationForm
+    return render(request, 'culture_templates/create_user.html', context=context)

@@ -16,12 +16,13 @@ urlpatterns = [
 
     #Culture views
     path('home_cultura/', culture.home, name='culture_home'),
+    path('crear_usuario/', culture.create_user, name='create_user'),
     path('administracion_clientes/', culture.client_admin, name='client_admin'),
     path('administracion_modulos/', culture.module_admin, name='module_admin'),
     path('administracion_clientes/editar_cliente/<str:client>/', culture.client_edit, name='client_edit'),
-    path('home/clientes_modulo/<str:module>/', culture.module_client_list, name='module_client_list'),
-    path('home/modulo_cliente/<str:module>/<str:client>/', culture.module_client, name='module_client'),
-    path('home/modulo_cliente/<str:module>/<str:client>/añadir_actividad', culture.add_activity, name='add_activity'),
+    path('clientes_modulo/<str:module>/', culture.module_client_list, name='module_client_list'),
+    path('modulo_cliente/<str:module>/<str:client>/', culture.module_client, name='module_client'),
+    path('modulo_cliente/<str:module>/<str:client>/añadir_actividad/', culture.add_activity, name='add_activity'),
 
     #User views
 

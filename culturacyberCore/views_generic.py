@@ -4,16 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseServerError
 
-from culturacyberAuth.forms import FormLogin
+from culturacyberAuth.forms import loginForm
 
 def login_view(request):
 
     if request.user.is_authenticated:
         return redirect('redirector')
 
-    form = FormLogin()
+    form = loginForm()
     if request.method == "POST":
-        form = FormLogin(request.POST)
+        form = loginForm(request.POST)
         if form.is_valid():
             user = form.cleaned_data['user']
             password = form.cleaned_data['password']

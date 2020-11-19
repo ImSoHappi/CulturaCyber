@@ -15,7 +15,7 @@
 							<span>
 								{{ request.user }}
 								<span class="user-level">
-								{{ request.user.extend.email }}  
+								{{ request.user.email }}  
 								</span>
 								<span class="caret"></span>
 							</span>
@@ -63,8 +63,14 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="{% url 'client_admin' %}">
-											<i class="fas fa-user-cog"></i>
+											<i class="fas fa-user-tie"></i>
 											<span class="sub-item">Clientes</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'create_user' %}">
+											<i class="fas fa-users"></i>
+											<span class="sub-item">Usuarios</span>
 										</a>
 									</li>
 								</ul>

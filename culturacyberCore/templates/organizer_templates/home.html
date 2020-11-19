@@ -9,7 +9,7 @@
 <div class="page-inner">
 
     <div class="page-header">
-        <h4 class="page-title">Menu principal Organizador</h4>
+        <h4 class="page-title">Menu principal organizador</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
                 <a href="{% url 'redirector' %}">
@@ -22,11 +22,11 @@
         </ul>
     </div>
 
-    <div class="card">
+    <div class="">
 
-        <div class="card-header">
+        <div class=" text-center">
             <div class="card-title">
-                Proximas actividades
+                Tareas actualizadas recientemente
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
             
                   <!--Controls-->
-                  <div class="controls-top col-md-4 ml-auto mr-auto mt-2 mb-3">
+                  <div class="controls-top col-md-4 ml-auto mr-auto mt-2 mb-3 mt--2">
                     <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
                     <a class="btn-floating pull-right" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
                   </div>
@@ -50,50 +50,21 @@
             
                       <div class="row">
 
+                        {% for task in recent_tasks|slice:":3" %}
                         <div class="col-md-4">
                             <div class="card mb-2">
-                              <div class="card-body mt--3">
+                              <div class="card-body mt--3 text-center p-5">
                                   <time datetime="" class="icon">
-                                      <em>Viernes</em>
-                                      <strong>Octubre</strong>
-                                      <span>20</span>
+                                      <em>{{ task.updated_at | date:'l' }}</em>
+                                      <strong>{{ task.updated_at | date:'F' }}</strong>
+                                      <span>{{ task.updated_at | date:'j' }}</span>
                                   </time>
-                                  <h4 class="card-title text-center">Actividad Seguridad</h4>
-                                  <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                      card's content.</p>
+                                  <h3 class="card-title text-center">{{ task.name }}</h3>
+                                  <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
                               </div>
                             </div>
                           </div>
-  
-                          <div class="col-md-4">
-                            <div class="card mb-2">
-                              <div class="card-body mt--3">
-                                  <time datetime="" class="icon">
-                                      <em>Martes</em>
-                                      <strong>Octubre</strong>
-                                      <span>13</span>
-                                  </time>
-                                  <h4 class="card-title text-center">Actividad Hacking</h4>
-                                  <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                      card's content.</p>
-                              </div>
-                            </div>
-                          </div>
-  
-                            <div class="col-md-4">
-                              <div class="card mb-2">
-                                <div class="card-body mt--3">
-                                    <time datetime="" class="icon">
-                                        <em>Jueves</em>
-                                        <strong>Enero</strong>
-                                        <span>1</span>
-                                    </time>
-                                    <h4 class="card-title text-center">Actividad phishing</h4>
-                                    <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                        card's content.</p>
-                                </div>
-                              </div>
-                            </div>
+                        {% endfor %}
                       </div>
             
                     </div>
@@ -103,50 +74,23 @@
                     <div class="carousel-item">
             
                       <div class="row">
+
+                        {% for task in recent_tasks|slice:"3:6" %}
                         <div class="col-md-4">
-                            <div class="card mb-2">
-                              <div class="card-body mt--3">
-                                  <time datetime="" class="icon">
-                                      <em>Martes</em>
-                                      <strong>septiemre</strong>
-                                      <span>5</span>
-                                  </time>
-                                  <h4 class="card-title text-center">Actividad phishing</h4>
-                                  <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                      card's content.</p>
-                              </div>
+                          <div class="card mb-2">
+                            <div class="card-body mt--3 text-center p-5">
+                                <time datetime="" class="icon">
+                                    <em>{{ task.updated_at | date:'l' }}</em>
+                                    <strong>{{ task.updated_at | date:'F' }}</strong>
+                                    <span>{{ task.updated_at | date:'j' }}</span>
+                                </time>
+                                <h3 class="card-title text-center">{{ task.name }}</h3>
+                                <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
                             </div>
                           </div>
-  
-                          <div class="col-md-4">
-                            <div class="card mb-2">
-                              <div class="card-body mt--3">
-                                  <time datetime="" class="icon">
-                                      <em>Martes</em>
-                                      <strong>Agosto</strong>
-                                      <span>2</span>
-                                  </time>
-                                  <h4 class="card-title text-center">Actividad phishing</h4>
-                                  <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                      card's content.</p>
-                              </div>
-                            </div>
-                          </div>
-  
-                            <div class="col-md-4">
-                              <div class="card mb-2">
-                                <div class="card-body mt--3">
-                                    <time datetime="" class="icon">
-                                        <em>Martes</em>
-                                        <strong>enero</strong>
-                                        <span>13</span>
-                                    </time>
-                                    <h4 class="card-title text-center">Actividad phishing</h4>
-                                    <p class="card-text" style="text-align: justify;">Some quick example text to build on the Actividad phishing and make up the bulk of the
-                                        card's content.</p>
-                                </div>
-                              </div>
-                            </div>
+                        </div>
+                        {% endfor %}
+
                       </div>
             
                     </div>
@@ -160,14 +104,14 @@
         </div>
     </div>
 
-    <hr width="90%" class="mt-5 mb-5">
+    <hr width="90%" class="mt-4 mb-3">
 
-    <div class="card mt-5">
-        <div class="card-header">
-            <div class="card-title">Resumen indicadores de riesgos</div>
+    <div class="card mt-4">
+        <div class="card-header text-center">
+            <div class="card-title">Avances de módulos</div>
         </div>
 
-        <div class="card-body row">
+        <div class="card-body row text-justify">
             {% for module in my_modules %}
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="card" style="height: 250px;">

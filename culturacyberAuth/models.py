@@ -14,7 +14,6 @@ class userModel(models.Model):
 
     user = models.OneToOneField(User, on_delete = models.CASCADE, related_name="extend")
     client = models.ForeignKey('clientModel', on_delete = models.CASCADE)
-    email = models.EmailField()
 
     is_cultureteam = models.BooleanField(default=False)
     is_organizer = models.BooleanField(default=False)

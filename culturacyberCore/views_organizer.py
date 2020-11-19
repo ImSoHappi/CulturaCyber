@@ -8,10 +8,11 @@ from datetime import datetime
 def home(request):
 
     client = request.user.extend.client
-
     context = {}
     context['segment'] = 'home'
     context['my_modules'] = clientModel.my_modules(client)
+    context['recent_tasks'] = taskModel.get_all_tasks_client(client).order_by('-updated_at')[:6]
+   
     return render(request, 'organizer_templates/home.html', context=context)
 
 @login_required(login_url='login')
@@ -37,4 +38,8 @@ def module_detail(request, module):
     context['segment'] = moduleModel.objects.get(uuid=module)
     context['my_modules'] = clientModel.my_modules(client)
     context['client'] = client
+    context['rejected_task'] = taskModel.get_rejected_module_task(module).count()
+    context['inprocess_task'] = taskModel.get_inprocess_module_task(module).count()
+    context['finished_task'] = taskModel.get_finished_module_task(module).count()
+
     return render(request, 'organizer_templates/module.html', context=context)
