@@ -19,6 +19,20 @@ TASK_STATUS = (
     (3, 'Rechazada'),
 )
 
+ACTIVITIES = (
+    (0, 'Poster Conocimiento'),
+    (1, 'Poster Actitud'),
+    (2, 'Poster Comportamiento'),
+    (3, 'Infografía'),
+    (4, 'Newsletter'),
+    (5, 'Noticia'),
+    (6, 'Vídeo'),
+    (7, 'Actividad/Ejercicio Phishing'),
+    (8, 'Test'),
+    (9, 'Prueba'),
+    (10, 'Encuesta')
+)
+
 class moduleModel(models.Model):
     uuid = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,7 +58,7 @@ class activityModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     disabled = models.BooleanField(default = False)
 
-    name = models.CharField(max_length=100)
+    name = models.IntegerField(choices=ACTIVITIES, default=0)
     client = models.ForeignKey('culturacyberAuth.clientModel', on_delete=models.CASCADE)
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE)
     description = models.TextField(max_length=400)
@@ -89,6 +103,7 @@ class taskModel(models.Model):
     activity = models.ForeignKey('activityModel', on_delete = models.CASCADE)
     task_status = models.IntegerField(choices = TASK_STATUS, default=1)
     teamslink = models.TextField()
+    updated_for = models.CharField(max_length=100, default="-")
 
     def __str__(self):
         return self.name

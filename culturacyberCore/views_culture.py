@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import moduleModel, taskModel, activityModel
-from culturacyberAuth.models import clientModel
-from .forms import clientForm, moduleForm, activityForm, taskForm
+from culturacyberAuth.models import clientModel, userModel
+from .forms import EditclientForm, AddclientForm, moduleForm, activityForm, taskForm
 from culturacyberAuth.forms import userForm
 from django.utils import timezone
 import datetime
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
 @login_required(login_url='login')
 def home(request):
@@ -45,25 +46,34 @@ def home(request):
 @login_required(login_url='login')
 def client_admin(request):
 
-    if 'edit_client' in request.POST:
-        client = request.POST['client_pk']
-        instance = get_object_or_404(clientModel, uuid=client)
-        form = clientForm(request.POST, instance=instance)
+    if request.method == "POST":
 
-        if form.is_valid():
-            form.save()
+        if 'edit_client' in request.POST:
+            client = request.POST['client_pk']
+            instance = get_object_or_404(clientModel, uuid=client)
+            form = clientForm(request.POST, instance=instance)
+
+            if form.is_valid():
+                form.save()
+                return redirect('client_admin')
+
+        if 'add_client' in request.POST:
+            form = clientForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('client_admin')
+
+        if 'desactivated_client' in request.POST:
+            client = request.POST['client_pk']
+            instance = get_object_or_404(clientModel, uuid=client)
+            instance.disabled^=True
+            instance.save()
             return redirect('client_admin')
-
-    if 'add_client' in request.POST:
-        form = clientForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('client_admin')
-
+            
     context = {}
     context['segment'] = 'admin'
     context['modules_list'] = moduleModel.get_all_modules()
-    context['form'] = clientForm()
+    context['form'] = AddclientForm()
     context['client_list'] = clientModel.all_client_list()
 
     return render(request, 'culture_templates/client_admin.html', context=context)
@@ -71,11 +81,13 @@ def client_admin(request):
 @login_required(login_url='login')
 def module_admin(request):
 
-    if 'add_module' in request.POST:
-        form = moduleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('module_admin')
+    if request.method == "POST":
+
+        if 'add_module' in request.POST:
+            form = moduleForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('module_admin')
 
     context = {}
     context['segment'] = 'admin'
@@ -93,28 +105,37 @@ def client_edit(request, client):
     context['segment'] = 'home'
     context['modules_list'] = moduleModel.get_all_modules()
     context['client'] = edit_client
-    context['form'] = clientForm(initial={'name':edit_client.name ,'teamslink':edit_client.teamslink, 'description':edit_client.description, 'disabled':edit_client.disabled})
+    context['form'] = EditclientForm(initial={'name':edit_client.name ,'teamslink':edit_client.teamslink, 'description':edit_client.description, 'disabled':edit_client.disabled})
 
     return render(request, 'culture_templates/edit_client.html', context=context)
 
 @login_required(login_url='login')
 def module_client_list(request, module):
     
-    if 'add_client_module' in request.POST:
-        client = clientModel.get_client(request.POST['client_uuid'])
-        module_add = moduleModel.get_module(module)
-        module_add.client.add(client)
-        module_add.save()
+    if request.method == "POST":
 
-        return redirect('module_client_list', module=module)
+        if 'edit_module' in request.POST:
+            instance = get_object_or_404(moduleModel, uuid=module)
+            form = moduleForm(request.POST, instance=instance)
+            if form.is_valid():
+                form.save()
+                return redirect('module_client_list', module=module)
 
-    if 'remove_client_module' in request.POST:
-        client = clientModel.get_client(request.POST['client_uuid'])
-        module_add = moduleModel.get_module(module)
-        module_add.client.remove(client)
-        module_add.save()
+        if 'add_client_module' in request.POST:
+            client = clientModel.get_client(request.POST['client_uuid'])
+            module_add = moduleModel.get_module(module)
+            module_add.client.add(client)
+            module_add.save()
 
-        return redirect('module_client_list', module=module)
+            return redirect('module_client_list', module=module)
+
+        if 'remove_client_module' in request.POST:
+            client = clientModel.get_client(request.POST['client_uuid'])
+            module_add = moduleModel.get_module(module)
+            module_add.client.remove(client)
+            module_add.save()
+
+            return redirect('module_client_list', module=module)
 
     context = {}
     context['segment'] = moduleModel.objects.get(uuid=module)
@@ -129,15 +150,7 @@ def module_client_list(request, module):
 def module_client(request, module, client):
 
     if request.method == "POST":
-
-        if "add_task" in request.POST:
-            form = taskForm(request.POST)
-            if form.is_valid():
-                task = form.save(commit=False)
-                task.activity = activityModel.get_activity(request.POST['activity'])
-                task.save()
-                return redirect('module_client', module=module, client=client)
-
+        ### Activities functions ###
         if "add_activity" in request.POST:
             form = activityForm(request.POST)
             client_act = clientModel.get_client(client)
@@ -151,10 +164,57 @@ def module_client(request, module, client):
                 activity.save()
                 return redirect('module_client', module=module, client=client)
 
-        task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
-        activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+        if 'edit_activity' in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            form = activityForm(request.POST, instance=activity)
+            if form.is_valid():
+                form.save()
+                return redirect('module_client', module=module, client=client) 
+
+        if "finish_activity" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            activity.activity_status = 0
+            activity.save()
+            next_activity = activityModel.get_next_activity(activity, client, module)
+            if next_activity != "finish":
+                next_activity.activity_status = 1
+                next_activity.save()
+            activity.activity_status = 0
+            activity.save()
+
+        if "waiting_activity" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            activity.activity_status = 2
+            activity.save()
+
+        if "inprocess_activity" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            activity.activity_status = 1
+            activity.save()
+
+        if "delete_activity" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            next_activity = activityModel.get_next_activity(activity, client, module)
+            if next_activity != "finish":
+                next_activity.activity_status = 1
+                next_activity.save()
+            activity.delete()
+
+        ### Tasks functions ###
+        
+        if "add_task" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            form = taskForm(request.POST)
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.activity = activity
+                task.save()
+                
+                return redirect('module_client', module=module, client=client)  
 
         if "finish_task" in request.POST:
+            task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             task.task_status = 0
             task.save()
             if taskModel.all_task_finish(activity):
@@ -166,18 +226,24 @@ def module_client(request, module, client):
                 activity.save()
 
         if "corrected_task" in request.POST:
+            task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             task.task_status = 2
             task.save()
             activity.activity_status = 1
             activity.save()
 
         if "reject_task" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
             task.task_status = 3
             task.save()
             activity.activity_status = 1
             activity.save()
 
         if "delete_task" in request.POST:
+            activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
+            task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
             task.delete()
 
             if taskModel.all_task_finish(activity):
@@ -222,3 +288,42 @@ def create_user(request):
     context['form_user'] = userForm
     context['form'] = UserCreationForm
     return render(request, 'culture_templates/create_user.html', context=context)
+
+
+@login_required(login_url='login')
+def edit_module(request, module):
+
+    edit_module = moduleModel.get_module(module)
+    
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+
+    context['form'] = moduleForm(initial={'name':edit_module.name ,'icon':edit_module.icon, 'description':edit_module.description})
+
+    return render(request, 'culture_templates/edit_module.html', context=context)
+
+
+@login_required(login_url='login')
+def client_users_list(request, client):
+    
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+
+    context['organizers_list'] = userModel.organizers_client_list(client)
+    return render(request, 'culture_templates/client_users_list.html', context=context)
+
+
+@login_required(login_url='login')
+def edit_activity(request, module, client, activity):
+
+    edit_activity = activityModel.get_activity(activity)
+
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+    context['activity'] = activityModel.get_activity(activity)
+    context['form'] = activityForm(initial={'name':edit_activity.name ,'programmed_date':edit_activity.programmed_date, 'description':edit_activity.description})
+
+    return render(request, 'culture_templates/edit_activity.html', context=context)

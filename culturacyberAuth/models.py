@@ -21,6 +21,9 @@ class userModel(models.Model):
     def __str__(self):
         return self.user.username
 
+    def organizers_client_list(client):
+        return userModel.objects.filter(client=client, is_organizer=True)
+
 class clientModel(models.Model):
     
     uuid = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)

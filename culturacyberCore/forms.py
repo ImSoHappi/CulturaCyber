@@ -1,7 +1,7 @@
 from django import forms
 from culturacyberAuth.models import clientModel, moduleModel, activityModel, taskModel
 
-class clientForm(forms.ModelForm):
+class EditclientForm(forms.ModelForm):
     class Meta:
         model = clientModel
         fields = ('name', 'teamslink', 'description', 'disabled',)
@@ -16,6 +16,21 @@ class clientForm(forms.ModelForm):
             'teamslink': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'description': forms.Textarea(attrs={'class': 'form-control mb-3'}),
             'disabled': forms.CheckboxInput(attrs={'class': 'form-check-input mb-3'}),
+        }
+
+class AddclientForm(forms.ModelForm):
+    class Meta:
+        model = clientModel
+        fields = ('name', 'teamslink', 'description',)
+        labels = {
+            'name': 'Nombre del cliente',
+            'teamslink': 'Link carpeta principal teams',
+            'description': 'Descripción',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'teamslink': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'description': forms.Textarea(attrs={'class': 'form-control mb-3'}),
         }
 
 class moduleForm(forms.ModelForm):
@@ -43,7 +58,7 @@ class activityForm(forms.ModelForm):
             'description': 'Descripción'
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.Select(attrs={'class': 'form-control'}),
             'programmed_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }

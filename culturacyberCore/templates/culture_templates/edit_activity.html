@@ -1,0 +1,28 @@
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Editar actividad</h2>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="modal-body card-body form-group" style="max-height: 400px; overflow: scroll; overflow-x: hidden;">
+
+                <div class="col-md-11 ml-auto mr-auto mt-2">
+
+                    {{ form.as_p }}
+
+                </div>
+
+            </div>
+            
+            <div class="modal-footer">
+                <input name="activitypk" style="display: none;" type="text" value="{{ activity.pk }}">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                <input type="submit" value="Guardar" name="edit_activity" onsubmit="setFormSubmitting()" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

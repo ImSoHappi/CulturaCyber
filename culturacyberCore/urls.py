@@ -23,6 +23,9 @@ urlpatterns = [
     path('clientes_modulo/<str:module>/', culture.module_client_list, name='module_client_list'),
     path('modulo_cliente/<str:module>/<str:client>/', culture.module_client, name='module_client'),
     path('modulo_cliente/<str:module>/<str:client>/añadir_actividad/', culture.add_activity, name='add_activity'),
+    path('editar_modulo/<str:module>/', culture.edit_module, name='edit_module'),
+    path('modulo_cliente/<str:module>/<str:client>/editar_actividad/<int:activity>', culture.edit_activity, name='edit_activity'),
+    path('listado_usuarios/cliente/<str:client>/', culture.client_users_list, name='client_users_list'),
 
     #User views
 

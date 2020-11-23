@@ -34,19 +34,26 @@
                                         <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
-                                        <div class="username">{{ client.name }}</div>
-                                        <div class="status">{{ client.description }}</div>
+                                        <div class="username" style="font-size: 16px;">{{ client.name }}</div>
                                     </div>
+                
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" name="client_pk" value="{{ client.pk }}" class="form-control" style="display: none;">
+                                        {% if client.disabled %}
+                                            <button class="btn btn-icon btn-danger btn-round btn-md mr-1" data-original-title="Desactivado" data-toggle="tooltip" name="desactivated_client">                  
+                                                <i class="fas fa-times fa-lg"></i>
+                                            </button>
+                                        {% else %}
+                                            <button class="btn btn-icon btn-success btn-round btn-md mr-1" data-original-title="Activado" data-toggle="tooltip" name="desactivated_client">                  
+                                                <i class="fas fa-check fa-lg"></i>
+                                            </button>
+                                        {% endif %}
+                                    </form>
 
-                                    {% if client.disabled %}
-                                        <button class="btn btn-icon btn-danger btn-round btn-md mr-1" data-original-title="Desactivado" data-toggle="tooltip">                  
-                                            <i class="fas fa-times fa-lg"></i>
-                                        </button>
-                                    {% else %}
-                                        <button class="btn btn-icon btn-success btn-round btn-md mr-1" data-original-title="Activado" data-toggle="tooltip">                  
-                                            <i class="fas fa-check fa-lg"></i>
-                                        </button>
-                                    {% endif %}
+                                    <button class="btn btn-icon btn-warning btn-round btn-md mr-1" data-original-title="Usuarios" data-toggle="tooltip" onclick="open_modal('{% url 'client_users_list' client=client.uuid %}')">                  
+                                        <i class="fas fa-users fa-lg"></i>
+                                    </button>
 
                                     <button class="btn btn-icon btn-primary btn-round btn-md" data-original-title="Editar" data-toggle="tooltip" onclick="open_modal('{% url 'client_edit' client=client.uuid %}')">                  
                                         <i class="far fa-edit fa-lg"></i>

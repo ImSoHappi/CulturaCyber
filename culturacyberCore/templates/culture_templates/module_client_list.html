@@ -6,6 +6,23 @@
 
 {% block content %}
 
+<div class="panel-header bg-secondary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <img src="/static/assets/img/unnamed.png" alt="" style="height: 100px; width: 100px;">
+            </div>
+            <div class="ml-3 mr-3">
+                <h2 class="text-white pb-2 fw-bold">{{ segment }}</h2>
+                <h5 class="text-white op-7 mb-2 text-justify">{{ segment.description }}</h5>
+            </div>
+            <div class="ml-md-auto py-2 py-md-0">
+                <a class="btn btn-white btn-border btn-round mr-2" name="edit_module" onclick="open_modal('{% url 'edit_module' module=segment.uuid %}')">Modificar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page-inner">
 
     <div class="page-header">
@@ -21,14 +38,14 @@
             </li>
         </ul>
     </div>
-
+    
 <div class="row mt-5">
 
     {% for client in active_client %}
     {% if client.disabled  %}
     {% else %}
-    <div class="col-md-3">
-        <div class="card card-profile"  style="height: 470px !important;">
+    <div class="col-xl-3 col-md-4">
+        <div class="card card-profile"  style="height: 400px !important;">
             <div class="card-header bg-primary-gradient">
                 <form action="" method="POST">
                     {% csrf_token %}
@@ -78,8 +95,8 @@
     {% for client in disable_client %}
         {% if client.disabled  %}
         {% else %}
-        <div class="col-md-3">
-            <div class="card card-profile" style="background-color: #1571e81e; height: 470px !important;">
+        <div class="col-xl-3 col-md-4">
+            <div class="card card-profile" style="background-color: #1571e81e; height: 350px !important;">
                 <div class="card-header" style="background-color:rgb(118, 149, 206);">
                     <form action="" method="POST">
                         {% csrf_token %}
@@ -126,12 +143,22 @@
         {% endif %}
     {% endfor %}
     
+    </div>
 </div>
-    
+
+<div class="modal fade col-md-6 ml-auto mr-auto" id="edit" role="dialog">
 
 </div>
 
 {% endblock content %}
 
 {% block javascripts %} 
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function open_modal(url){
+        $('#edit').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+</script>
 {% endblock javascripts %}
