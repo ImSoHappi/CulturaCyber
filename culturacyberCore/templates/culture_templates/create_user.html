@@ -22,13 +22,13 @@
         </ul>
     </div>
 
-    <div class="col-md-8 mr-auto ml-auto card form-group">
+    <div class="col-md-8 mr-auto ml-auto card">
         <div class="card-header">
             <div class="card-title">
                 Crear un nuevo usuario
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body form-group col-md-8 mr-auto ml-auto">
 
             <form method="POST">
 
@@ -37,7 +37,7 @@
                 {{ form_user.client.label_tag }}
                 {{ form_user.client }}
 
-                <div class="form-check">
+                <div class="form-check mt-4 mb-2 text-center">
                     <label class="form-check-label">
                         {{ form_user.is_cultureteam }}
                         <span class="form-check-sign"></span>{{ form_user.is_cultureteam.label_tag }}</span>
@@ -48,7 +48,7 @@
                     </label>
                 </div>
 
-                <button class="btn btn-success pull-right mt-3 mb-3" type="submit">Crear</button>
+                <button class="btn btn-success pull-right mt-3 mb-3" type="submit" name="create_user">Crear</button>
 
             </form>
 

@@ -8,6 +8,8 @@ from django.utils import timezone
 import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from culturacyberAuth.forms import mainuserForm
+from django.contrib.auth.models import User
 
 @login_required(login_url='login')
 def home(request):
@@ -208,6 +210,7 @@ def module_client(request, module, client):
             if form.is_valid():
                 task = form.save(commit=False)
                 task.activity = activity
+                task.updated_for = request.user.get_full_name()
                 task.save()
                 
                 return redirect('module_client', module=module, client=client)  
@@ -216,6 +219,7 @@ def module_client(request, module, client):
             task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             task.task_status = 0
+            task.updated_for = request.user.get_full_name()
             task.save()
             if taskModel.all_task_finish(activity):
                 next_activity = activityModel.get_next_activity(activity, client, module)
@@ -229,6 +233,7 @@ def module_client(request, module, client):
             task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             task.task_status = 2
+            task.updated_for = request.user.get_full_name()
             task.save()
             activity.activity_status = 1
             activity.save()
@@ -237,6 +242,7 @@ def module_client(request, module, client):
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
             task.task_status = 3
+            task.updated_for = request.user.get_full_name()
             task.save()
             activity.activity_status = 1
             activity.save()
@@ -281,12 +287,37 @@ def add_activity(request, module, client):
 @login_required(login_url='login')
 def create_user(request):
 
+    if request.method == "POST":
+
+        if "create_user" in request.POST:
+            mainform = mainuserForm(request.POST)
+            form = userForm(request.POST)
+            if mainform.is_valid():
+                user = User.objects.create_user(mainform.cleaned_data['username'], mainform.cleaned_data['username'], mainform.cleaned_data['password1'])
+                user.first_name = mainform.cleaned_data['first_name']
+                user.last_name = mainform.cleaned_data['last_name']
+                user.save()
+                client = clientModel.get_client(form['client'].value())
+                
+                if 'is_cultureteam' in request.POST:
+                    culture = True
+                else:
+                    culture = False
+
+                if 'is_organizer' in request.POST:
+                    orgnizer = True
+                else:
+                    orgnizer = False    
+
+                userextend = userModel(user=user, client=client, is_cultureteam=culture , is_organizer=orgnizer)
+                userextend.save()
+                return redirect('create_user')
     
     context = {}
     context['segment'] = 'home'
     context['modules_list'] = moduleModel.get_all_modules()
     context['form_user'] = userForm
-    context['form'] = UserCreationForm
+    context['form'] = mainuserForm
     return render(request, 'culture_templates/create_user.html', context=context)
 
 

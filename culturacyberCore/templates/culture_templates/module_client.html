@@ -35,11 +35,11 @@
             <table class="table table-hover" id="table_module">
                 <thead>
                     <tr style="background-color: #48abf7 !important; color: #fff;">
-                        <th scope="col" width="3%">#</th>
+                        <th scope="col" width="1%">#</th>
                         <th scope="col">Actividad</th>
-                        <th scope="col">Estado actual</th>
+                        <th scope="col" width="150px">Estado actual</th>
                         <th scope="col">Fecha de entrega</th>
-                        <th scope="col" width="3%">Documento</th>
+                        <th scope="col" width="2%">Documento</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                         {% for activity in client_activities %}
                             <tr class="mainactivity">
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.get_name_display }}</td>
                                 
                                 {% if activity.activity_status == 0 %}<td class="text-success"><i class="far fa-check-square fa-lg"> Finalizado</i></td>{% endif %}
                                 {% if activity.activity_status == 1 %}<td class="text-primary"><i class="far fa-square fa-lg"></i> En Proceso</td>{% endif %}
@@ -96,10 +96,11 @@
                                                 
                                                 <thead>
                                                     <tr style="background-color: unset !important;">
-                                                        <th width="5%"><center>Estado</center></th>
+                                                        <th width="1%"><center>Estado</center></th>
                                                         <th>Proceso</th>
+                                                        <th>Actualizado por</th>
                                                         <th>Fecha actualización</th>
-                                                        <th><center>Opciones</center></th>
+                                                        <th width="1%"><center>Opciones</center></th>
                                                     </tr>
                                                 </thead>
 
@@ -113,6 +114,7 @@
                                                                 {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
 
                                                                 <td>{{ task.name }}</td>
+                                                                <td>{{ task.updated_for }}</td>
                                                                 <td>{{ task.updated_at }}</td>
                                                                 <td>
                                                                     <center>
@@ -141,7 +143,7 @@
                                                         <form method="POST">
                                                             <td colspan="1">
                                                                 <center>
-                                                                    <input type="text" name="activitypk" value="{{ activity.pk }}">
+                                                                    <input style="display: none;" type="text" name="activitypk" value="{{ activity.pk }}">
                                                                     <button class="btn btn-icon btn-success btn-round btn-md pull-right mt--4 mr-2 btn-lg" data-original-title="Añadir tarea" data-toggle="tooltip" type="submit" name="add_task" onsubmit="setFormSubmitting()">                  
                                                                         <i class="fas fa-plus fa-lg"></i>
                                                                     </button>

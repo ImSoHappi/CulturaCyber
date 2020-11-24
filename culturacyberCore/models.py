@@ -66,7 +66,7 @@ class activityModel(models.Model):
     programmed_date = models.DateField()
 
     def __str__(self):
-        return self.name
+        return self.get_name_display()
 
     def get_next_activity(current_activity, client, module):
 
