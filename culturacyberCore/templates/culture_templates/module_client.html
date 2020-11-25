@@ -129,6 +129,7 @@
                                                                                     <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
                                                                                     <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
                                                                                     <input style="cursor: pointer;" type="submit" value="Corregida" name="corrected_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
+                                                                                    <input style="cursor: pointer;" value="Editar" onclick="open_modal('{% url 'edit_task' task=task.pk %}')" class="dropdown-item" />
                                                                                     <input style="cursor: pointer;" type="submit" value="Borrar" name="delete_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
                                                                                 </form>
                                                                             </li>

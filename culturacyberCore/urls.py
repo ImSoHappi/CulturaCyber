@@ -24,6 +24,7 @@ urlpatterns = [
     path('modulo_cliente/<str:module>/<str:client>/', culture.module_client, name='module_client'),
     path('modulo_cliente/<str:module>/<str:client>/añadir_actividad/', culture.add_activity, name='add_activity'),
     path('editar_modulo/<str:module>/', culture.edit_module, name='edit_module'),
+    path('editar_tarea/<str:task>/', culture.edit_task, name='edit_task'),
     path('modulo_cliente/<str:module>/<str:client>/editar_actividad/<int:activity>', culture.edit_activity, name='edit_activity'),
     path('listado_usuarios/cliente/<str:client>/', culture.client_users_list, name='client_users_list'),
 
@@ -31,7 +32,7 @@ urlpatterns = [
 
 
     # path('listado_encuestas', views.survey_list, name='survey_list'),
-    # path('crear_encuestas', views.add_survey, name='add_survey'),
+    # path('crear_encuestas', culture.add_survey, name='add_survey'),
     # path('detalle_encuesta', views.survey_detail, name='survey_detail'),
     # path('module', views.module, name='module'),
 ]

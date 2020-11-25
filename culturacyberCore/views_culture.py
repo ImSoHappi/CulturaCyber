@@ -203,7 +203,13 @@ def module_client(request, module, client):
             activity.delete()
 
         ### Tasks functions ###
-        
+        if "edit_task" in request.POST:
+            task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
+            form = taskForm(request.POST, instance=task)
+            if form.is_valid():
+                form.save()
+                return redirect('module_client', module=module, client=client) 
+
         if "add_task" in request.POST:
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
             form = taskForm(request.POST)
@@ -358,3 +364,22 @@ def edit_activity(request, module, client, activity):
     context['form'] = activityForm(initial={'name':edit_activity.name ,'programmed_date':edit_activity.programmed_date, 'description':edit_activity.description})
 
     return render(request, 'culture_templates/edit_activity.html', context=context)
+
+@login_required(login_url='login')
+def edit_task(request, task):
+
+    edit_task = taskModel.get_task(task)
+
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+    context['task'] = taskModel.get_task(task)
+    context['form'] = taskForm(initial={'name':edit_task.name ,'task_status':edit_task.task_status, 'teamslink':edit_task.teamslink})
+
+    return render(request, 'culture_templates/edit_task.html', context=context)
+
+@login_required(login_url='login')
+def add_survey(request):
+    
+    return render(request, 'add_survey.html')    
+  

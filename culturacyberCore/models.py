@@ -108,6 +108,9 @@ class taskModel(models.Model):
     def __str__(self):
         return self.name
 
+    def get_task(task):
+        return taskModel.objects.get(pk=task)
+
     def all_task_finish(activity):
         task_list = taskModel.objects.filter(activity=activity)
         for task in task_list:
