@@ -159,7 +159,7 @@
                                                                 {% if task.task_status == 2 %}<td class="text-warning"><center><i class="far fa-question-circle fa-2x" data-original-title="Corregido" data-toggle="tooltip"></i></center></td>{% endif %}
                                                                 {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
 
-                                                                <td>{{ task.name }}</td>
+                                                                <td><a href="{{ task.teamslink }}" target="_blank">{{ task.name }}</a></td>
                                                                 <td>{{ task.updated_for }}</td>
                                                                 <td>{{ task.updated_at }}</td>
                                                                 <td>
@@ -169,8 +169,7 @@
                                                                             <li>
                                                                                 <form method="POST">
                                                                                     {% csrf_token %}
-                                                                                    <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">
-                                                                                    <a href="{{ task.teamslink }}" class="dropdown-item" target="_blank">Abrir en teams</a>
+                                                                                    <input name="taskpk" style="display: none;" type="text" value="{{ task.pk }}">                                                                    
                                                                                     <input style="cursor: pointer;" type="submit" value="Aprobar" name="finish_task" onsubmit="setFormSubmitting()" class="dropdown-item" />
                                                                                     <input style="cursor: pointer;" type="submit" value="Rechazar" name="reject_task" onsubmit="setFormSubmitting()" class="dropdown-item" /> 
                                                                                 </form>
