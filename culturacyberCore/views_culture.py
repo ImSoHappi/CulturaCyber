@@ -53,14 +53,14 @@ def client_admin(request):
         if 'edit_client' in request.POST:
             client = request.POST['client_pk']
             instance = get_object_or_404(clientModel, uuid=client)
-            form = clientForm(request.POST, instance=instance)
+            form = EditclientForm(request.POST, instance=instance)
 
             if form.is_valid():
                 form.save()
                 return redirect('client_admin')
 
         if 'add_client' in request.POST:
-            form = clientForm(request.POST)
+            form = AddclientForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect('client_admin')

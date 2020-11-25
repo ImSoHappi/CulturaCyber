@@ -9,17 +9,21 @@
 
             <div class="modal-body card-body form-group">
                 <div class="card-list">
-                    {% for user in organizers_list %}
-                            <div class="item-list">
-                                <div class="avatar">
-                                    <img src="/static/assets/img/administrator-2-64.png" alt="..." class="avatar-img rounded-circle">
+                    {% if organizers_list %}
+                        {% for user in organizers_list %}
+                        <div class="item-list">
+                            <div class="avatar">
+                                        <img src="/static/assets/img/administrator-2-64.png" alt="..." class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="info-user ml-3">
+                                        <div class="username" style="font-size: 16px;">{{ user.user.first_name }} {{ user.user.last_name }}</div>
+                                        <div class="status" style="font-size: 14px;">{{ user.user.email }}</div>
+                                    </div>
                                 </div>
-                                <div class="info-user ml-3">
-                                    <div class="username" style="font-size: 16px;">{{ user.user.first_name }} {{ user.user.last_name }}</div>
-                                    <div class="status" style="font-size: 14px;">{{ user.user.email }}</div>
-                                </div>
-                            </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center">Aún no hay usuarios organizadores.</div>
+                    {% endif %}
                 </div>
             </div>
             
