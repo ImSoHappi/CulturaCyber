@@ -44,7 +44,7 @@
     {% for client in active_client %}
     {% if client.disabled  %}
     {% else %}
-    <div class="col-xl-3 col-md-4">
+    <div class="col-xl-4 col-lg-6 col-md-6">
         <div class="card card-profile"  style="height: 400px !important;">
             <div class="card-header bg-primary-gradient">
                 <form action="" method="POST">
@@ -95,8 +95,8 @@
     {% for client in disable_client %}
         {% if client.disabled  %}
         {% else %}
-        <div class="col-xl-3 col-md-4">
-            <div class="card card-profile" style="background-color: #1571e81e; height: 350px !important;">
+        <div class="col-xl-4 col-lg-6 col-md-6">
+            <div class="card card-profile" style="background-color: #1571e81e; height: 400px !important;">
                 <div class="card-header" style="background-color:rgb(118, 149, 206);">
                     <form action="" method="POST">
                         {% csrf_token %}

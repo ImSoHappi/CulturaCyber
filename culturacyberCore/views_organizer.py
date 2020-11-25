@@ -11,7 +11,7 @@ def home(request):
     context = {}
     context['segment'] = 'home'
     context['my_modules'] = clientModel.my_modules(client)
-    context['recent_tasks'] = taskModel.get_all_tasks_client(client).order_by('-updated_at')[:6]
+    context['recent_tasks'] = taskModel.get_calendar_task(client).order_by('-updated_at')[:6]
    
     return render(request, 'organizer_templates/home.html', context=context)
 

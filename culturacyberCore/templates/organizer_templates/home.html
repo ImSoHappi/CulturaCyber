@@ -44,12 +44,12 @@
             
                   <!--Slides-->
                   <div class="carousel-inner" role="listbox">
-            
+                    
                     <!--First slide-->
                     <div class="carousel-item active">
             
                       <div class="row">
-
+                        {% if recent_tasks%}
                         {% for task in recent_tasks|slice:":3" %}
                         <div class="col-md-4">
                             <div class="card mb-2">
@@ -61,10 +61,16 @@
                                   </time>
                                   <h3 class="card-title text-center">{{ task.name }}</h3>
                                   <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
+                                  <p class="card-text">Por: {{ task.updated_for }}</p>
                               </div>
                             </div>
                           </div>
                         {% endfor %}
+                        {% else %}
+                          <div class="mr-auto ml-auto">
+                              Aún no hay tareas
+                          </div>
+                        {% endif %}
                       </div>
             
                     </div>
@@ -75,21 +81,28 @@
             
                       <div class="row">
 
+                        {% if recent_tasks%}
                         {% for task in recent_tasks|slice:"3:6" %}
                         <div class="col-md-4">
-                          <div class="card mb-2">
-                            <div class="card-body mt--3 text-center p-5">
-                                <time datetime="" class="icon">
-                                    <em>{{ task.updated_at | date:'l' }}</em>
-                                    <strong>{{ task.updated_at | date:'F' }}</strong>
-                                    <span>{{ task.updated_at | date:'j' }}</span>
-                                </time>
-                                <h3 class="card-title text-center">{{ task.name }}</h3>
-                                <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
+                            <div class="card mb-2">
+                              <div class="card-body mt--3 text-center p-5">
+                                  <time datetime="" class="icon">
+                                      <em>{{ task.updated_at | date:'l' }}</em>
+                                      <strong>{{ task.updated_at | date:'F' }}</strong>
+                                      <span>{{ task.updated_at | date:'j' }}</span>
+                                  </time>
+                                  <h3 class="card-title text-center">{{ task.name }}</h3>
+                                  <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
+                                  <p class="card-text">Por: {{ task.updated_for }}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
                         {% endfor %}
+                        {% else %}
+                          <div class="mr-auto ml-auto">
+                              Aún no hay tareas
+                          </div>
+                        {% endif %}
 
                       </div>
             
@@ -140,7 +153,7 @@
             {% else %}
             <div class="col-md-12 text-center">
                 <h4 class="text-muted mt-3">No tienes ningún modulo activado.</h4>
-                <p class="text-muted">Si crees que es un error contacta al equipo de cultura.</p>
+                <p class="text-muted">Si crees que es un error contacta al equipo cultura de Cybertrust.</p>
             </div>
             {% endif %}
         </div>

@@ -6,6 +6,20 @@
 
 {% block content %}
 
+<div class="panel-header bg-secondary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <img src="/static/assets/img/unnamed.png" alt="" style="height: 100px; width: 100px;">
+            </div>
+            <div class="ml-3 mr-3">
+                <h2 class="text-white pb-2 fw-bold">{{ segment }}</h2>
+                <h5 class="text-white op-7 mb-2 text-justify">{{ segment.description }}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page-inner">
 
     <div class="page-header">
@@ -130,6 +144,7 @@
                                                     <tr style="background-color: unset !important;">
                                                         <th width="5%"><center>Estado</center></th>
                                                         <th>Proceso</th>
+                                                        <th>Actualizado por</th>
                                                         <th>Fecha actualización</th>
                                                         <th><center>Opciones</center></th>
                                                     </tr>
@@ -145,6 +160,7 @@
                                                                 {% if task.task_status == 3 %}<td class="text-danger"><center><i class="far fa-times-circle fa-2x" data-original-title="Rechazado" data-toggle="tooltip"></i></center></td>{% endif %}
 
                                                                 <td>{{ task.name }}</td>
+                                                                <td>{{ task.updated_for }}</td>
                                                                 <td>{{ task.updated_at }}</td>
                                                                 <td>
                                                                     <center>
@@ -188,7 +204,7 @@
 
     <hr width="90%" class="mt-5 mb-5">
 
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header">
             <div class="card-title">Estado de encuestas</div>
         </div>
@@ -254,7 +270,8 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
+
 </div>
 
 {% endblock content %}

@@ -134,6 +134,11 @@ class taskModel(models.Model):
     def get_all_tasks_client(client):
         activity = activityModel.objects.filter(client=client)
         return taskModel.objects.filter(activity__in=activity)
+
+    def get_calendar_task(client):
+        active_modules = moduleModel.objects.filter(client = client)
+        activity = activityModel.objects.filter(client=client, module__in=active_modules)
+        return taskModel.objects.filter(activity__in=activity)
     
     def get_rejected_module_task(module):
         activities = activityModel.objects.filter(module=module)
