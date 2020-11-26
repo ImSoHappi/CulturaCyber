@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(moduleModel)
 admin.site.register(activityModel)
 admin.site.register(taskModel)
+admin.site.register(client_module_Model)

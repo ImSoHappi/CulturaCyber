@@ -1,5 +1,6 @@
 from django import forms
 from culturacyberAuth.models import clientModel, moduleModel, activityModel, taskModel
+from .models import client_module_Model
 
 class EditclientForm(forms.ModelForm):
     class Meta:
@@ -74,4 +75,15 @@ class taskForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'teamslink': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+        }
+
+class add_teamslinkForm(forms.ModelForm):
+    class Meta:
+        model = client_module_Model
+        fields = ('teamslink',)
+        labels = {
+            'teamslink': 'Link a la carpeta del modulo en teams',
+        }
+        widgets = {
+            'teamslink': forms.TextInput(attrs={'class': 'form-control mb-3'}),
         }

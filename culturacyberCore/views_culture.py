@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import moduleModel, taskModel, activityModel
+from .models import moduleModel, taskModel, activityModel, client_module_Model
 from culturacyberAuth.models import clientModel, userModel
-from .forms import EditclientForm, AddclientForm, moduleForm, activityForm, taskForm
+from .forms import EditclientForm, AddclientForm, moduleForm, activityForm, taskForm, add_teamslinkForm
 from culturacyberAuth.forms import userForm
 from django.utils import timezone
 import datetime
@@ -152,6 +152,14 @@ def module_client_list(request, module):
 def module_client(request, module, client):
 
     if request.method == "POST":
+
+        if "add_teams_link" in request.POST:
+            client_module = get_object_or_404(client_module_Model, pk=request.POST['client_module.pk'])
+            form = add_teamslinkForm(request.POST, instance=client_module)
+            if form.is_valid():
+                form.save()
+            return redirect('module_client', module=module, client=client) 
+
         ### Activities functions ###
         if "add_activity" in request.POST:
             form = activityForm(request.POST)
@@ -274,6 +282,7 @@ def module_client(request, module, client):
     context['client_activities'] = clientModel.my_activities(client, module)
     context['client_tasks'] = clientModel.my_tasks(client, module)
     context['form'] = taskForm
+    context['client_module'] = client_module_Model.get_client_module(module, client)
 
     return render(request, 'culture_templates/module_client.html', context=context)
 
@@ -379,7 +388,16 @@ def edit_task(request, task):
     return render(request, 'culture_templates/edit_task.html', context=context)
 
 @login_required(login_url='login')
-def add_survey(request):
+def add_teams_link(request, module, client):
+
+    edit_client_module = client_module_Model.get_client_module(module, client)
+
+    context = {}
+    context['segment'] = 'home'
+    context['modules_list'] = moduleModel.get_all_modules()
+    context['form'] = add_teamslinkForm(initial={'teamslink':edit_client_module.teamslink})
+    context['client_module'] = client_module_Model.get_client_module(module, client)
+    return render(request, 'culture_templates/add_teams_link.html', context=context)    
+
     
-    return render(request, 'add_survey.html')    
   

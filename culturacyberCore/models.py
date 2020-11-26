@@ -33,6 +33,14 @@ ACTIVITIES = (
     (10, 'Encuesta')
 )
 
+class client_module_Model(models.Model):
+    client = models.ForeignKey('culturacyberAuth.clientModel', on_delete=models.CASCADE, blank=True, null=True)
+    module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE, blank=True, null=True)
+    teamslink = models.TextField(null=True, blank=True)
+
+    def get_client_module(module, client):
+        return client_module_Model.objects.get(module=module, client=client)
+
 class moduleModel(models.Model):
     uuid = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -42,7 +50,7 @@ class moduleModel(models.Model):
     name = models.CharField(max_length=100, unique=True)
     icon = models.TextField(null=True, blank=True)
     description = models.TextField()
-    client = models.ManyToManyField('culturacyberAuth.clientModel', blank=True)
+    client = models.ManyToManyField('culturacyberAuth.clientModel', blank=True , through='client_module_Model')
 
     def __str__(self):
         return self.name

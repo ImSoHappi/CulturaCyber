@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Añadir link del modulo en teams</h2>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="modal-body card-body form-group" style="max-height: 400px; overflow: scroll; overflow-x: hidden;">
+
+                <div class="col-md-11 ml-auto mr-auto mt-2">
+
+                    <p class="text-warning h5 text-justify mb-3">Aún no has añadido ninguna carpeta de teams para este modulo, agrega una ahora para usar esta función.</p>
+
+                    {{ form.as_p }}
+                    
+                </div>
+
+            </div>
+            
+            <div class="modal-footer">
+                <input name="client_module.pk" style="display: none;" type="text" value="{{ client_module.pk }}">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                <input type="submit" value="Guardar" name="add_teams_link" onsubmit="setFormSubmitting()" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

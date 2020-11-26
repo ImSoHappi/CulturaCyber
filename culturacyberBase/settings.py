@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5en&e*8k1xa$+@%av=f%g3&mcyxuu5200+*$o2(^l%a(yjku)i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,24 +81,14 @@ WSGI_APPLICATION = 'culturacyberBase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd77ofkk158gi0m',
-            'USER': 'afoexoiijllxgi',
-            'PASSWORD': '1acd0fbdf64d9d0dc7898edf76622d78326719a5eb2db53c9c8b841c8f394149',
-            'HOST': 'ec2-54-160-161-214.compute-1.amazonaws.com',
-            'PORT': '5432'
-        }
-    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

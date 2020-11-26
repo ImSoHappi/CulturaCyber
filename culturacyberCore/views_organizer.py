@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from culturacyberAuth.models import clientModel
-from .models import moduleModel, taskModel
+from .models import moduleModel, taskModel, client_module_Model
 from datetime import datetime
 
 @login_required(login_url='login')
@@ -41,5 +41,6 @@ def module_detail(request, module):
     context['rejected_task'] = taskModel.get_rejected_module_task(module).count()
     context['inprocess_task'] = taskModel.get_inprocess_module_task(module).count()
     context['finished_task'] = taskModel.get_finished_module_task(module).count()
+    context['client_module'] = client_module_Model.get_client_module(module, client)
 
     return render(request, 'organizer_templates/module.html', context=context)

@@ -16,6 +16,11 @@
                 <h2 class="text-white pb-2 fw-bold">{{ segment }}</h2>
                 <h5 class="text-white op-7 mb-2 text-justify">{{ segment.description }}</h5>
             </div>
+            {% if client_module.teamslink %}
+                <div class="ml-md-auto py-2 py-md-0">
+                    <a class="btn pull-right btn-secondary" href="{{ client_module.teamslink }}" data-original-title="Ir a la carpeta teams" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="40px" height="35px" class="mr-3">Carpeta módulo</a>
+                </div>
+            {% endif %} 
         </div>
     </div>
 </div>
@@ -98,8 +103,7 @@
 
     <div class="card" style="user-select: none;">
         <div class="card-header">
-            <div class="card-title">Estado de actividades</div>
-            <a class="btn btn-icon btn-round pull-right mt--4 mr-2 btn-lg" style="background-color: #e09af3;" href="{{ client.teamslink }}" data-original-title="Ir a la carpeta teams" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="23px" height="24px" class="mt-2"></a>
+            <div class="card-title">Estado de actividades</div>   
         </div>
         <div class="card-body table-responsive">
             <table class="table table-hover" id="table_module">

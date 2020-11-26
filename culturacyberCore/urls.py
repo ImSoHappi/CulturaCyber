@@ -19,6 +19,7 @@ urlpatterns = [
     path('crear_usuario/', culture.create_user, name='create_user'),
     path('administracion_clientes/', culture.client_admin, name='client_admin'),
     path('administracion_modulos/', culture.module_admin, name='module_admin'),
+    path('administracion_modulos/<str:module>/añadir_teams_link/<str:client>/', culture.add_teams_link, name='add_teams_link'),
     path('administracion_clientes/editar_cliente/<str:client>/', culture.client_edit, name='client_edit'),
     path('clientes_modulo/<str:module>/', culture.module_client_list, name='module_client_list'),
     path('modulo_cliente/<str:module>/<str:client>/', culture.module_client, name='module_client'),
