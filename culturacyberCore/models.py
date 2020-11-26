@@ -38,6 +38,9 @@ class client_module_Model(models.Model):
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE, blank=True, null=True)
     teamslink = models.TextField(null=True, blank=True)
 
+    class Meta:
+        db_table = "culturacyberCore_moduleModel_client"
+
     def get_client_module(module, client):
         return client_module_Model.objects.get(module=module, client=client)
 
