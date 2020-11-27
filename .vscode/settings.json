@@ -42,5 +42,6 @@
         "topbar toggler",
         "webkit",
         "webkit line clamp"
-    ]
+    ],
+    "python.pythonPath": "c:\\Users\\Samue\\Desktop\\CulturaCyber\\venv\\Scripts\\python.exe"
 }
