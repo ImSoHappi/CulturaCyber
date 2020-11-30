@@ -50,22 +50,28 @@
             
                       <div class="row">
                         {% if recent_tasks%}
-                        {% for task in recent_tasks|slice:":3" %}
-                        <div class="col-md-4">
-                            <div class="card mb-2">
-                              <div class="card-body mt--3 text-center p-5">
-                                  <time datetime="" class="icon">
-                                      <em>{{ task.updated_at | date:'l' }}</em>
-                                      <strong>{{ task.updated_at | date:'F' }}</strong>
-                                      <span>{{ task.updated_at | date:'j' }}</span>
-                                  </time>
-                                  <h3 class="card-title text-center">{{ task.name }}</h3>
-                                  <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
-                                  <p class="card-text">Por: {{ task.updated_for }}</p>
-                              </div>
-                            </div>
-                          </div>
-                        {% endfor %}
+                            {% for task in recent_tasks|slice:":3" %}
+                            {% for module in my_modules %}
+                                {% if module.module == task.activity.module %}
+                                    {% if not module.disabled %}
+                                        <div class="col-md-4">
+                                            <div class="card mb-2">
+                                            <div class="card-body mt--3 text-center p-5">
+                                                <time datetime="" class="icon">
+                                                    <em>{{ task.updated_at | date:'l' }}</em>
+                                                    <strong>{{ task.updated_at | date:'F' }}</strong>
+                                                    <span>{{ task.updated_at | date:'j' }}</span>
+                                                </time>
+                                                <h3 class="card-title text-center">{{ task.name }}</h3>
+                                                <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
+                                                <p class="card-text">Por: {{ task.updated_for }}</p>
+                                            </div>
+                                            </div>
+                                        </div>     
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% endfor %}
                         {% else %}
                           <div class="mr-auto ml-auto">
                               Aún no hay tareas
@@ -82,22 +88,28 @@
                       <div class="row">
 
                         {% if recent_tasks%}
-                        {% for task in recent_tasks|slice:"3:6" %}
-                        <div class="col-md-4">
-                            <div class="card mb-2">
-                              <div class="card-body mt--3 text-center p-5">
-                                  <time datetime="" class="icon">
-                                      <em>{{ task.updated_at | date:'l' }}</em>
-                                      <strong>{{ task.updated_at | date:'F' }}</strong>
-                                      <span>{{ task.updated_at | date:'j' }}</span>
-                                  </time>
-                                  <h3 class="card-title text-center">{{ task.name }}</h3>
-                                  <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
-                                  <p class="card-text">Por: {{ task.updated_for }}</p>
-                              </div>
-                            </div>
-                          </div>
-                        {% endfor %}
+                            {% for task in recent_tasks|slice:"3:6" %}
+                            {% for module in my_modules %}
+                                {% if module.module == task.activity.module %}
+                                    {% if not module.disabled %}
+                                        <div class="col-md-4">
+                                            <div class="card mb-2">
+                                            <div class="card-body mt--3 text-center p-5">
+                                                <time datetime="" class="icon">
+                                                    <em>{{ task.updated_at | date:'l' }}</em>
+                                                    <strong>{{ task.updated_at | date:'F' }}</strong>
+                                                    <span>{{ task.updated_at | date:'j' }}</span>
+                                                </time>
+                                                <h3 class="card-title text-center">{{ task.name }}</h3>
+                                                <p class="card-text">Ultima actualización: {{ task.updated_at }}</p>
+                                                <p class="card-text">Por: {{ task.updated_for }}</p>
+                                            </div>
+                                            </div>
+                                        </div>     
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% endfor %}
                         {% else %}
                           <div class="mr-auto ml-auto">
                               Aún no hay tareas
@@ -127,28 +139,30 @@
         <div class="card-body row">
             {% if my_modules %}
             {% for module in my_modules %}
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card" style="height: 250px;">
-                    <div class="card-body text-justify">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <a href="{% url 'module_detail' module=module.uuid %}"><h4><b>{{ module.name }}</b></h4></a>
-                                <p class="text-muted" style="max-height: 100px;   overflow: hidden; text-overflow: ellipsis;">
-                                    {{ module.description }}
-                                </p>
-                            </div>
+                {% if not module.disabled %}
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card" style="height: 250px;">
+                        <div class="card-body text-justify">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <a href="{% url 'module_detail' module=module.module.uuid %}"><h4><b>{{ module.name }}</b></h4></a>
+                                    <p class="text-muted" style="max-height: 100px;   overflow: hidden; text-overflow: ellipsis;">
+                                        {{ module.description }}
+                                    </p>
+                                </div>
 
-                        </div>
-                        <div class="progress progress-sm" style="height: 25px;">
-                            <div class="progress-bar bg-info w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">% de avance</p>
-                            <p class="text-muted mb-0">50%</p>
+                            </div>
+                            <div class="progress progress-sm" style="height: 25px;">
+                                <div class="progress-bar bg-info w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <p class="text-muted mb-0">% de avance</p>
+                                <p class="text-muted mb-0">50%</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {% endif %}
             {% endfor %}
             {% else %}
             <div class="col-md-12 text-center">

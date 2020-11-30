@@ -39,110 +39,154 @@
         </ul>
     </div>
     
-<div class="row mt-5">
+    <div class="row mt-5">
+        
+        {% for client in client_list_module %}
+            {% if not client.client.disabled %}
+                {% if client.disabled %}
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="card card-profile" style="background-color: #1571e81e; height: 400px !important;">
+                        <div class="card-header" style="background-color:rgb(118, 149, 206);">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="text" value="{{ client.client.uuid }}" name="client_uuid" style="display: none;">
+                                <button style="padding: 0%; background-color: Transparent; border: none;" class="btn-round pull-right" type="submit" name="add_client_module" onsubmit="setFormSubmitting()">
+                                    <i class="far fa-circle text-primary fa-3x" id="iconhover" data-original-title="Habilitar modulo" data-toggle="tooltip"></i>
+                                </button>
+                            </form>
+                            
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="user-profile text-center">
+                                <div class="name" style="text-transform: uppercase;">{{ client.client.name }}</div>
+                                <div class="desc text-dark text-justify">{{ client.client.description }}</div>
+                        
+                                <div class="view-profile">
+                                    <a href="{% url 'module_client' module=segment.uuid client=client.client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row user-stats text-center">
+                                <div class="col">
+                                    <div class="number">125</div>
+                                    <div class="title">Actividades</div>
+                                </div>
+                                <div class="col">
+                                    <div class="number">25</div>
+                                    <div class="title">Encuestas</div>
+                                </div>
+                                <div class="col">
+                                    <div class="number">134</div>
+                                    <div class="title">Tareas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="card card-profile"  style="height: 400px !important;">
+                        <div class="card-header bg-primary-gradient">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <input type="text" value="{{ client.client.uuid }}" name="client_uuid" style="display: none;">
+                                <button style="padding: 0%; background-color: Transparent; border: none;" class="btn-round pull-right" type="submit" name="remove_client_module" onsubmit="setFormSubmitting()">
+                                    <i class="far fa-check-circle text-success fa-3x pull-right" id="iconhover" data-original-title="Deshabilitar modulo" data-toggle="tooltip"></i>
+                                </button>
+                            </form>
+                            
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="user-profile text-center">
+                                <div class="name" style="text-transform: uppercase;">{{ client.client.name }}</div>
+                                <div class="desc text-justify">{{ client.client.description }}</div>
+                        
+                                <div class="view-profile">
+                                    <a href="{% url 'module_client' module=segment.uuid client=client.client.uuid %}" class="btn btn-primary btn-block">Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row user-stats text-center">
+                                <div class="col">
+                                    <div class="number">125</div>
+                                    <div class="title">Actividades</div>
+                                </div>
+                                <div class="col">
+                                    <div class="number">25</div>
+                                    <div class="title">Encuestas</div>
+                                </div>
+                                <div class="col">
+                                    <div class="number">134</div>
+                                    <div class="title">Tareas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
 
-    {% for client in active_client %}
-    {% if client.disabled  %}
-    {% else %}
-    <div class="col-xl-4 col-lg-6 col-md-6">
-        <div class="card card-profile"  style="height: 400px !important;">
-            <div class="card-header bg-primary-gradient">
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <input type="text" value="{{ client.uuid }}" name="client_uuid" style="display: none;">
-                    <button style="padding: 0%; background-color: Transparent; border: none;" class="btn-round pull-right" type="submit" name="remove_client_module" onsubmit="setFormSubmitting()">
-                        <i class="far fa-check-circle text-success fa-3x pull-right" id="iconhover" data-original-title="Deshabilitar modulo" data-toggle="tooltip"></i>
-                    </button>
-                </form>
-                
-                <div class="profile-picture">
-                    <div class="avatar avatar-xl">
-                        <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+        {% for client in client_list %}
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="card card-profile" style="background-color: #1571e81e; height: 400px !important;">
+                    <div class="card-header" style="background-color:rgb(118, 149, 206);">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <input type="text" value="{{ client.uuid }}" name="client_uuid" style="display: none;">
+                            <button style="padding: 0%; background-color: Transparent; border: none;" class="btn-round pull-right" type="submit" name="add_client_module" onsubmit="setFormSubmitting()">
+                                <i class="far fa-circle text-primary fa-3x" id="iconhover" data-original-title="Habilitar modulo" data-toggle="tooltip"></i>
+                            </button>
+                        </form>
+                        
+                        <div class="profile-picture">
+                            <div class="avatar avatar-xl">
+                                <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="user-profile text-center">
-                    <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
-                    <div class="desc text-justify">{{ client.description }}</div>
-            
-                    <div class="view-profile">
-                        <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-primary btn-block">Detalles</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="row user-stats text-center">
-                    <div class="col">
-                        <div class="number">125</div>
-                        <div class="title">Actividades</div>
-                    </div>
-                    <div class="col">
-                        <div class="number">25</div>
-                        <div class="title">Encuestas</div>
-                    </div>
-                    <div class="col">
-                        <div class="number">134</div>
-                        <div class="title">Tareas</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-
-    {% for client in disable_client %}
-        {% if client.disabled  %}
-        {% else %}
-        <div class="col-xl-4 col-lg-6 col-md-6">
-            <div class="card card-profile" style="background-color: #1571e81e; height: 400px !important;">
-                <div class="card-header" style="background-color:rgb(118, 149, 206);">
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <input type="text" value="{{ client.uuid }}" name="client_uuid" style="display: none;">
-                        <button style="padding: 0%; background-color: Transparent; border: none;" class="btn-round pull-right" type="submit" name="add_client_module" onsubmit="setFormSubmitting()">
-                            <i class="far fa-circle text-primary fa-3x" id="iconhover" data-original-title="Habilitar modulo" data-toggle="tooltip"></i>
-                        </button>
-                    </form>
+                    <div class="card-body">
+                        <div class="user-profile text-center">
+                            <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
+                            <div class="desc text-dark text-justify">{{ client.description }}</div>
                     
-                    <div class="profile-picture">
-                        <div class="avatar avatar-xl">
-                            <img src="/static/assets/img/download.jpg" alt="..." class="avatar-img rounded-circle">
+                            <div class="view-profile">
+                                <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="user-profile text-center">
-                        <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
-                        <div class="desc text-dark text-justify">{{ client.description }}</div>
-                
-                        <div class="view-profile">
-                            <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="row user-stats text-center">
-                        <div class="col">
-                            <div class="number">125</div>
-                            <div class="title">Actividades</div>
-                        </div>
-                        <div class="col">
-                            <div class="number">25</div>
-                            <div class="title">Encuestas</div>
-                        </div>
-                        <div class="col">
-                            <div class="number">134</div>
-                            <div class="title">Tareas</div>
+                    <div class="card-footer">
+                        <div class="row user-stats text-center">
+                            <div class="col">
+                                <div class="number">125</div>
+                                <div class="title">Actividades</div>
+                            </div>
+                            <div class="col">
+                                <div class="number">25</div>
+                                <div class="title">Encuestas</div>
+                            </div>
+                            <div class="col">
+                                <div class="number">134</div>
+                                <div class="title">Tareas</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
-    {% endfor %}
-    
+        {% endfor %}
+
     </div>
 </div>
 

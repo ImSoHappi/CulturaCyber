@@ -37,12 +37,17 @@ class client_module_Model(models.Model):
     client = models.ForeignKey('culturacyberAuth.clientModel', on_delete=models.CASCADE, blank=True, null=True)
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE, blank=True, null=True)
     teamslink = models.TextField(null=True, blank=True)
+    disabled = models.BooleanField(default = False)
 
     class Meta:
         db_table = "culturacyberCore_moduleModel_client"
 
     def get_client_module(module, client):
         return client_module_Model.objects.get(module=module, client=client)
+    
+    def get_client_module_list(module):
+        return client_module_Model.objects.filter(module=module)
+    
 
 class moduleModel(models.Model):
     uuid = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -150,9 +155,10 @@ class taskModel(models.Model):
         return taskModel.objects.filter(activity__in=activity)
 
     def get_calendar_task(client):
-        active_modules = moduleModel.objects.filter(client = client)
-        activity = activityModel.objects.filter(client=client, module__in=active_modules)
-        return taskModel.objects.filter(activity__in=activity)
+        active_modules = moduleModel.objects.filter(client=client)
+        active_modules = activityModel.objects.filter(module__in=active_modules, client=client)
+        active_modules = taskModel.objects.filter(activity__in=active_modules)
+        return active_modules
     
     def get_rejected_module_task(module):
         activities = activityModel.objects.filter(module=module)

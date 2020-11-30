@@ -126,25 +126,31 @@ def module_client_list(request, module):
         if 'add_client_module' in request.POST:
             client = clientModel.get_client(request.POST['client_uuid'])
             module_add = moduleModel.get_module(module)
-            module_add.client.add(client)
-            module_add.save()
+            if client in module_add.client.all():
+                client_module = client_module_Model.get_client_module(module, client)
+                client_module.disabled = False
+                client_module.save()
+            else:
+                module_add.client.add(client)
+                module_add.save()
 
             return redirect('module_client_list', module=module)
 
         if 'remove_client_module' in request.POST:
             client = clientModel.get_client(request.POST['client_uuid'])
-            module_add = moduleModel.get_module(module)
-            module_add.client.remove(client)
-            module_add.save()
+            client_module = client_module_Model.get_client_module(module, client)
+            client_module.disabled = True
+            client_module.save()
 
             return redirect('module_client_list', module=module)
+
 
     context = {}
     context['segment'] = moduleModel.objects.get(uuid=module)
     context['modules_list'] = moduleModel.get_all_modules()
     context['module_detail'] = moduleModel.get_module(module)
-    context['active_client'] = clientModel.active_model_clients(module)
-    context['disable_client'] = clientModel.disable_model_clients(module)
+    context['client_list_module'] = client_module_Model.get_client_module_list(module)
+    context['client_list'] = clientModel.all_client_list_active(module)
 
     return render(request, 'culture_templates/module_client_list.html', context=context)
 
@@ -281,8 +287,9 @@ def module_client(request, module, client):
     context['client'] = clientModel.get_client(client)
     context['client_activities'] = clientModel.my_activities(client, module)
     context['client_tasks'] = clientModel.my_tasks(client, module)
-    context['form'] = taskForm
     context['client_module'] = client_module_Model.get_client_module(module, client)
+    context['form'] = taskForm
+    
 
     return render(request, 'culture_templates/module_client.html', context=context)
 

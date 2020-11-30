@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 
-from culturacyberCore.models import moduleModel, activityModel, taskModel
+from culturacyberCore.models import moduleModel, activityModel, taskModel, client_module_Model
 
 # Create your models here.
 
@@ -39,7 +39,7 @@ class clientModel(models.Model):
         return self.name
 
     def my_modules(client):
-        return moduleModel.objects.filter(client = client)
+        return client_module_Model.objects.filter(client = client)
 
     def my_activities(client, module):
         return activityModel.objects.filter(client=client, module=module)
@@ -50,6 +50,10 @@ class clientModel(models.Model):
 
     def all_client_list():
         return clientModel.objects.all()
+
+    def all_client_list_active(module):
+        clients_filter = moduleModel.objects.get(uuid=module).client.all()
+        return clientModel.objects.filter(disabled=False).exclude(uuid__in=clients_filter)
     
     def get_client(client):
         return clientModel.objects.get(uuid=client)
