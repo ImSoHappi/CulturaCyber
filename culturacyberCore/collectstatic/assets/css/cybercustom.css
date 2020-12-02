@@ -17,6 +17,9 @@
     #carouselbutton{
         margin-top: 0;
     }
+    #graphs{
+      margin-top: 30px !important;
+    }
 }
 
 .animation.faded-out{
@@ -127,7 +130,6 @@ time.icon:hover, time.icon:focus
   background-color: rgb(240, 240, 240);
 }
 
-
 .spinner{
   width:30px;
   height:30px;
@@ -150,5 +152,10 @@ time.icon:hover, time.icon:focus
 }
 
 #iconhover:hover{
-  color: white !important;
+  color: rgb(46, 46, 46) !important;
+}
+
+#inactive{
+  background-color: rebeccapurple !important;
+  height: 60000px !important;
 }

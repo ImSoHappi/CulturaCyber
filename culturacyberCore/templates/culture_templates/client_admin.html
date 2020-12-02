@@ -35,6 +35,15 @@
                                     </div>
                                     <div class="info-user ml-3">
                                         <div class="username" style="font-size: 16px;">{{ client.name }}</div>
+                                        <div class="status">
+                                            {% for module in module_client_list %}
+                                                {% if module.client == client %}
+                                                    {% if not module.disabled %}
+                                                        {{ module.module.name }} /
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
                 
                                     <form method="POST">

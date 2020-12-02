@@ -48,6 +48,9 @@ class client_module_Model(models.Model):
     def get_client_module_list(module):
         return client_module_Model.objects.filter(module=module)
     
+    def all_client_module():
+        return client_module_Model.objects.all()
+    
 
 class moduleModel(models.Model):
     uuid = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
@@ -143,7 +146,7 @@ class taskModel(models.Model):
     def inprocess_tasks():
         today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
-        return taskModel.objects.filter( Q(task_status=1) | Q(task_status=2), created_at__range=[last_monday, today] )
+        return taskModel.objects.filter( Q(task_status=1) | Q(task_status=2))
 
     def finished_tasks():
         today = timezone.now()
@@ -160,16 +163,16 @@ class taskModel(models.Model):
         active_modules = taskModel.objects.filter(activity__in=active_modules)
         return active_modules
     
-    def get_rejected_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_rejected_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter(activity__in=activities, task_status=3)
     
-    def get_finished_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_finished_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter(activity__in=activities, task_status=0)
 
-    def get_inprocess_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_inprocess_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter( Q(task_status=1) |  Q(task_status=2), activity__in=activities )
     
 

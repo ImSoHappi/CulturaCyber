@@ -38,9 +38,9 @@ def module_detail(request, module):
     context['segment'] = moduleModel.objects.get(uuid=module)
     context['my_modules'] = clientModel.my_modules(client)
     context['client'] = client
-    context['rejected_task'] = taskModel.get_rejected_module_task(module).count()
-    context['inprocess_task'] = taskModel.get_inprocess_module_task(module).count()
-    context['finished_task'] = taskModel.get_finished_module_task(module).count()
+    context['rejected_task'] = taskModel.get_rejected_module_task(module, client).count()
+    context['inprocess_task'] = taskModel.get_inprocess_module_task(module, client).count()
+    context['finished_task'] = taskModel.get_finished_module_task(module, client).count()
     context['client_module'] = client_module_Model.get_client_module(module, client)
 
     return render(request, 'organizer_templates/module.html', context=context)

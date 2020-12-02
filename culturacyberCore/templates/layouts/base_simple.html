@@ -40,15 +40,12 @@
 </head>
 <body data-background-color="bg">
 
-	
-
-	<div class="{% block layout %} compact-wrapper {% endblock layout %}">
 
 		{% include 'includes/navigation.html' %}
 
-		{% include 'includes/sidenav.html' %}
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-		<div class="main-panel">
+		<div class="main-panel" style="width: 100% !important;">
 
 			<div class="content">
 
@@ -60,37 +57,14 @@
 
 		</div>
 		
-	</div>
+
 
 	{% include 'includes/scripts.html' %}
 
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-	{% if messages %}
-		{% for m in messages %}
-			{% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-				<script>
-					Swal.fire({
-						"title": "Felicitaciones",
-						"text": "{{ m }}",
-						"icon": "{{ m.extra_tags }}"
-					})
-				</script>
-			{% endif %}
-			{% if m.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-				<script>
-					Swal.fire({
-						"title": "Upsss...",
-						"text": "{{ m | safe }}",
-						"icon": "{{ m.extra_tags }}"
-					})
-				</script>
-			{% endif %}
-		{% endfor %}
-	{% endif %}
+	
 
 	<!-- Specific JS goes HERE -->
-    {% block javascripts %}{% endblock javascripts %}
+	{% block javascripts %}{% endblock javascripts %}
 	
 </body>
 </html>
