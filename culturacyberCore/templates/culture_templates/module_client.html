@@ -6,6 +6,28 @@
 
 {% block content %}
 
+<div class="panel-header bg-secondary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <img src="/static/assets/img/unnamed.png" alt="" style="height: 100px; width: 100px;">
+            </div>
+            <div class="ml-3 mr-3">
+                <h2 class="text-white pb-2 fw-bold">{{ segment }}</h2>
+                <h5 class="text-white op-7 mb-2 text-justify">{{ segment.description }}</h5>
+            </div>
+            <div class="ml-md-auto py-2 py-md-0">
+                {% if client_module.teamslink %}
+                    <a class="btn btn-round btn-md text-white btn-secondary"  href="{{ client_module.teamslink }}" data-original-title="Ir a la carpeta teams del modulo" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="35px" height="35px" class="mr-3">Carpeta módulo</a>
+                {% else %}
+                    <a class="btn btn-round btn-md text-white btn-secondary"  data-original-title="Añadir link teams" data-toggle="tooltip" onclick="open_modal('{% url 'add_teams_link' module=client_module.module.uuid client=client_module.client.uuid %}')"><img src="/static/assets/img/teams.svg.webp" alt="" width="35px" height="35px" class="mr-3">Carpeta módulo</a>  
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <div class="page-inner">
 
     <div class="page-header">
@@ -22,16 +44,69 @@
         </ul>
     </div>
 
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="card card-stats card-danger card-round">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-5">
+                          <div class="icon-big text-center">
+                              <i class="far fa-times-circle fa-2x"></i>
+                          </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                          <div class="numbers">
+                              <p class="card-category">Tareas rechazadas</p>
+                              <h4 class="card-title">{{rejected_task}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="card card-stats card-primary card-round">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-5">
+                          <div class="icon-big text-center">
+                              <i class="far fa-circle fa-2x"></i>
+                          </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                          <div class="numbers">
+                              <p class="card-category">Tareas en proceso</p>
+                              <h4 class="card-title">{{inprocess_task}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="card card-stats card-success card-round">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-5">
+                          <div class="icon-big text-center">
+                              <i class="far fa-check-circle fa-2x"></i>
+                          </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                          <div class="numbers">
+                              <p class="card-category">Tareas terminadas</p>
+                              <h4 class="card-title">{{finished_task}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
 
     <div class="card" style="user-select: none;">
         <div class="card-header">
             <div class="card-title">Estado de actividades</div>
-            {% if client_module.teamslink %}
-                <a class="btn btn-icon btn-round pull-right mt--4 mr-2 btn-lg" style="background-color: #e09af3;" href="{{ client_module.teamslink }}" data-original-title="Ir a la carpeta teams del modulo" data-toggle="tooltip" target="_blank"><img src="/static/assets/img/teams.svg.webp" alt="" width="23px" height="24px" class="mt-2"></a>
-            {% else %}
-                <a class="btn btn-icon btn-round pull-right mt--4 mr-2 btn-lg" style="background-color: #e09af3;" data-original-title="Añadir link teams" data-toggle="tooltip" onclick="open_modal('{% url 'add_teams_link' module=client_module.module.uuid client=client_module.client.uuid %}')"><img src="/static/assets/img/teams.svg.webp" alt="" width="23px" height="24px" class="mt-2"></a>  
-            {% endif %}
-            
             <button class="btn btn-icon btn-success btn-round btn-md pull-right mt--4 mr-2 btn-lg" data-original-title="Añadir actividad" data-toggle="tooltip" onclick="open_modal('{% url 'add_activity' module=segment.uuid client=client.uuid %}')">                  
                 <i class="fas fa-plus fa-lg"></i>
             </button>

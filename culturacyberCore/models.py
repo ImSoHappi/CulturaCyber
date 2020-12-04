@@ -3,6 +3,8 @@ import uuid, random
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.apps import apps
+
 
 # Create your models here.
 
@@ -36,7 +38,7 @@ ACTIVITIES = (
 class client_module_Model(models.Model):
     client = models.ForeignKey('culturacyberAuth.clientModel', on_delete=models.CASCADE, blank=True, null=True)
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE, blank=True, null=True)
-    teamslink = models.TextField(null=True, blank=True)
+    teamslink = models.TextField(default='-')
     disabled = models.BooleanField(default = False)
 
     class Meta:
@@ -44,9 +46,27 @@ class client_module_Model(models.Model):
 
     def get_client_module(module, client):
         return client_module_Model.objects.get(module=module, client=client)
+
+    def get_or_create_client_module(module, client):
+        try:
+            return client_module_Model.objects.get(module=module, client=client)
+        except:
+            
+            new_module = moduleModel.objects.get(uuid=module)
+            new_client = apps.get_model('culturacyberAuth.clientModel').objects.get(uuid=client)
+            cmm = client_module_Model()
+            cmm.client = new_client
+            cmm.module = new_module
+            cmm.disabled = True
+            cmm.save()
+            return cmm
+        
     
     def get_client_module_list(module):
         return client_module_Model.objects.filter(module=module)
+    
+    def all_client_module():
+        return client_module_Model.objects.all()
     
 
 class moduleModel(models.Model):
@@ -143,7 +163,7 @@ class taskModel(models.Model):
     def inprocess_tasks():
         today = timezone.now()
         last_monday = today - timedelta(days = today.weekday())
-        return taskModel.objects.filter( Q(task_status=1) | Q(task_status=2), created_at__range=[last_monday, today] )
+        return taskModel.objects.filter( Q(task_status=1) | Q(task_status=2))
 
     def finished_tasks():
         today = timezone.now()
@@ -160,16 +180,16 @@ class taskModel(models.Model):
         active_modules = taskModel.objects.filter(activity__in=active_modules)
         return active_modules
     
-    def get_rejected_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_rejected_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter(activity__in=activities, task_status=3)
     
-    def get_finished_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_finished_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter(activity__in=activities, task_status=0)
 
-    def get_inprocess_module_task(module):
-        activities = activityModel.objects.filter(module=module)
+    def get_inprocess_module_task(module, client):
+        activities = activityModel.objects.filter(module=module, client=client)
         return taskModel.objects.filter( Q(task_status=1) |  Q(task_status=2), activity__in=activities )
     
 

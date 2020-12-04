@@ -145,9 +145,9 @@
                         <div class="card-body text-justify">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <a href="{% url 'module_detail' module=module.module.uuid %}"><h4><b>{{ module.name }}</b></h4></a>
+                                    <a href="{% url 'module_detail' module=module.module.uuid %}"><h4><b>{{ module.module.name }}</b></h4></a>
                                     <p class="text-muted" style="max-height: 100px;   overflow: hidden; text-overflow: ellipsis;">
-                                        {{ module.description }}
+                                        {{ module.module.description }}
                                     </p>
                                 </div>
 

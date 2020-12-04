@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from culturacyberAuth.forms import mainuserForm
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 @login_required(login_url='login')
 def home(request):
@@ -57,13 +58,22 @@ def client_admin(request):
 
             if form.is_valid():
                 form.save()
+                messages.success(request, "El cliente se edito correctamente.", extra_tags="success")
+                return redirect('client_admin')
+            else:
+                messages.error(request, "El cliente no se ha podido editar", extra_tags="error" )
                 return redirect('client_admin')
 
         if 'add_client' in request.POST:
             form = AddclientForm(request.POST)
             if form.is_valid():
                 form.save()
+                messages.success(request, "El cliente fue creado correctamente.", extra_tags="success")
                 return redirect('client_admin')
+            else:
+                messages.error(request, "El cliente no se ha podido crear", extra_tags="error" )
+                return redirect('client_admin')
+
 
         if 'desactivated_client' in request.POST:
             client = request.POST['client_pk']
@@ -77,6 +87,7 @@ def client_admin(request):
     context['modules_list'] = moduleModel.get_all_modules()
     context['form'] = AddclientForm()
     context['client_list'] = clientModel.all_client_list()
+    context['module_client_list'] = client_module_Model.all_client_module()
 
     return render(request, 'culture_templates/client_admin.html', context=context)
 
@@ -88,7 +99,11 @@ def module_admin(request):
         if 'add_module' in request.POST:
             form = moduleForm(request.POST)
             if form.is_valid():
-                form.save()
+                new_module = form.save()
+                messages.success(request ,"El módulo fue creado correctamente.", extra_tags="success")
+                return redirect('module_client_list', module=new_module.uuid)
+            else:
+                messages.error(request, "El módulo no se ha podido crear", extra_tags="error" )
                 return redirect('module_admin')
 
     context = {}
@@ -121,6 +136,10 @@ def module_client_list(request, module):
             form = moduleForm(request.POST, instance=instance)
             if form.is_valid():
                 form.save()
+                messages.success(request, "El módulo se edito correctamente.", extra_tags="success")
+                return redirect('module_client_list', module=module)
+            else:
+                messages.error(request, "El módulo no se ha podido editar", extra_tags="error" )
                 return redirect('module_client_list', module=module)
 
         if 'add_client_module' in request.POST:
@@ -164,6 +183,7 @@ def module_client(request, module, client):
             form = add_teamslinkForm(request.POST, instance=client_module)
             if form.is_valid():
                 form.save()
+                messages.success(request ,"Se añadio el link correctamente.", extra_tags="success")
             return redirect('module_client', module=module, client=client) 
 
         ### Activities functions ###
@@ -178,6 +198,11 @@ def module_client(request, module, client):
                 if activityModel.first_activity(module, client):
                     activity.activity_status = 1
                 activity.save()
+                messages.success(request ,"La actividad fue creada correctamente.", extra_tags="success")
+                return redirect('module_client', module=module, client=client)
+
+            else:
+                messages.error(request, "La actividad no se ha podido crear", extra_tags="error" )
                 return redirect('module_client', module=module, client=client)
 
         if 'edit_activity' in request.POST:
@@ -185,7 +210,11 @@ def module_client(request, module, client):
             form = activityForm(request.POST, instance=activity)
             if form.is_valid():
                 form.save()
-                return redirect('module_client', module=module, client=client) 
+                messages.success(request ,"La actividad se edito correctamente.", extra_tags="success")
+                return redirect('module_client', module=module, client=client)
+            else:
+                messages.error(request, "La actividad no se ha podido editar", extra_tags="error" )
+                return redirect('module_client', module=module, client=client)
 
         if "finish_activity" in request.POST:
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
@@ -222,7 +251,11 @@ def module_client(request, module, client):
             form = taskForm(request.POST, instance=task)
             if form.is_valid():
                 form.save()
-                return redirect('module_client', module=module, client=client) 
+                messages.success(request ,"La tarea se edito correctamente.", extra_tags="success")
+                return redirect('module_client', module=module, client=client)
+            else:
+                messages.error(request, "La actividad no se ha podido editar", extra_tags="error" )
+                return redirect('module_client', module=module, client=client)
 
         if "add_task" in request.POST:
             activity = get_object_or_404(activityModel, pk=request.POST['activitypk'])
@@ -232,8 +265,11 @@ def module_client(request, module, client):
                 task.activity = activity
                 task.updated_for = request.user.get_full_name()
                 task.save()
-                
+                messages.success(request ,"La tarea fue creada correctamente.", extra_tags="success")
                 return redirect('module_client', module=module, client=client)  
+            else:
+                messages.error(request, "La tarea no se ha podido crear", extra_tags="error" )
+                return redirect('module_client', module=module, client=client)
 
         if "finish_task" in request.POST:
             task = get_object_or_404(taskModel, pk=request.POST['taskpk'])
@@ -287,7 +323,10 @@ def module_client(request, module, client):
     context['client'] = clientModel.get_client(client)
     context['client_activities'] = clientModel.my_activities(client, module)
     context['client_tasks'] = clientModel.my_tasks(client, module)
-    context['client_module'] = client_module_Model.get_client_module(module, client)
+    context['client_module'] = client_module_Model.get_or_create_client_module(module, client)
+    context['rejected_task'] = taskModel.get_rejected_module_task(module, client).count()
+    context['inprocess_task'] = taskModel.get_inprocess_module_task(module, client).count()
+    context['finished_task'] = taskModel.get_finished_module_task(module, client).count()
     context['form'] = taskForm
     
 
@@ -333,6 +372,11 @@ def create_user(request):
 
                 userextend = userModel(user=user, client=client, is_cultureteam=culture , is_organizer=orgnizer)
                 userextend.save()
+                
+                messages.success(request ,"El usuario fue creado correctamente.", extra_tags="success")
+                return redirect('create_user')
+            else:
+                messages.error(request, "El usuario no se ha podido crear", extra_tags="error" )
                 return redirect('create_user')
     
     context = {}

@@ -30,6 +30,16 @@
                     <span class="label-input100">Contraseña</span>
                 </div>
 
+                    {% if messages %}
+                        {% for m in messages %}
+                        <div style="color: {{ m.extra_tags }} ;" class="text-center" id="toggle">
+                            {{ m }}
+                        </div>       
+                        {% endfor %}
+                    {% endif %}
+
+
+
                 <div class="container-login100-form-btn" style="margin-top: 50px;">
                     <input type="submit" class="login100-form-btn" value="Iniciar sesión">&nbsp;
                 </div>
@@ -43,3 +53,5 @@
 </div>
 
 {% endblock content %}
+
+

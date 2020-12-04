@@ -9,6 +9,8 @@ urlpatterns = [
     path('', generic.login_view, name='login'),
     path('logout/', generic.logout_view, name='logout'),
     path('redirector/', generic.redirector, name="redirector"),
+    path('encuesta/', generic.survey , name='survey'),
+    path('mi_perfil/', generic.my_profile, name='my_profile'),
 
     #Organizer views
     path('home/', organizer.home, name='organizer_home'),

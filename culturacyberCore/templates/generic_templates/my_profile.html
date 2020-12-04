@@ -1,0 +1,117 @@
+{% extends "layouts/base_simple.html" %}
+
+{% block title %} Mi perfil {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+<div class="page-inner">
+
+    <a href="{% url 'redirector' %}" class="btn btn-primary pull-right"><span class="btn-label"><i class="fas fa-arrow-left"></i></span>Volver</a>
+
+    <div class="col-md-10 ml-auto mr-auto mt-5 row">
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Cliente: {{ request.user.extend.client }}</div>
+                </div>
+                <div class="card-body">
+                    <img src="/static/assets/img/download.jpg" alt="" style="height: 100%; width: 100%;" class="rounded">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 ">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Mis datos</div>
+                </div>
+
+                <div class="card-body mt-2 mb-4 col-md-9">
+
+                    <div class="card-title mb-3">Información personal</div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width: 155px;"><i class="fas fa-address-card fa-md"> Nombre</i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" value="{{ request.user.first_name }}" name="first_name">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width: 155px;"><i class="fas fa-address-card fa-md"> Apellidos</i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" value="{{ request.user.last_name }}" name="last_name">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width: 155px;"><i class="fas fa-address-card fa-md"> Correo</i></span>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Correo" aria-label="Username" aria-describedby="basic-addon1" value="{{ request.user.email }}" name="email">
+                        </div>
+
+                        <input type="submit" name="edit_user" class="btn btn-success text-white btn-sm mt-3" value="Actualizar información">
+                    </form>
+
+                    <hr class="mt-5 mb-4">
+
+                    <div class="card-title mb-3">Contraseña</div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width: 155px;"><i class="fas fa-address-card fa-md"> Nueva contraseña</i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Ingresa la nueva contraseña" aria-label="Username" aria-describedby="basic-addon1" name="pass1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width: 155px;"><i class="fas fa-address-card fa-md"> Repetir contraseña</i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="Repite la nueva contraseña" aria-label="Username" aria-describedby="basic-addon1" name="pass2">
+                        </div>
+
+                        <input type="submit" name="edit_user_pass" class="btn btn-success text-white btn-sm mt-3" value="Actualizar contraseña">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% if messages %}
+    {% for m in messages %}
+        {% if m.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>
+                Swal.fire({
+                    "title": "Felicitaciones",
+                    "text": "{{ m }}",
+                    "icon": "{{ m.extra_tags }}"
+                })
+            </script>
+        {% endif %}
+        {% if m.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <script>
+                Swal.fire({
+                    "title": "Upsss...",
+                    "text": "{{ m | safe }}",
+                    "icon": "{{ m.extra_tags }}"
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endblock content %}
+
+{% block javascripts %} {% endblock javascripts %}

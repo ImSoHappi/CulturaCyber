@@ -1,0 +1,299 @@
+{% extends "layouts/base_simple.html" %}
+
+{% block title %} Survey {% endblock %}
+
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+<div class="card noselect">
+    <div class="panel-header bg-secondary-gradient">
+        <div class="page-inner py-5 text-center col-md-5 mr-auto ml-auto">
+            <div class="d-flex align-items-left align-items-md-center flex-column">
+                <div>
+                    <img src="/static/assets/img/cybertrust_candado.png" alt="" style="height: 150px; width: 120px;">
+                </div>
+                <div class="ml-3 mr-3 mt-2">
+                    <h2 class="text-white pb-2 fw-bold">ENCUESTA</h2>
+                    <h5 class="text-white op-7 mb-2 text-justify">Evaluación Cultura en Ciberseguridad Organizacional </h5>
+                </div>
+            </div>
+    
+            <div class="progress progress-md mt-4">
+                <div class="progress-bar bg-info w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+                <p class="text-white mb-0">Avance</p>
+                <p class="text-white mb-0">50%</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-title card-header text-secondary fw-bold mt-3">Participación del Directorio en Ciberseguridad</div>
+
+    <div class="col-md-12 ml-auto mr-auto text-center question" style="padding-top: 70px;">
+        <h2 class="fw-bold">El Directorio considera que la Ciberseguridad es prioridad en la organización</h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h4 fw-bold my-auto">
+                Muy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="icon-input" value="1" class="selectgroup-input" id="1">
+                            <span class="selectgroup-button selectgroup-button-icon btn-"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="icon-input" value="2" class="selectgroup-input" id="1">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="icon-input" value="0" class="selectgroup-input" checked id="1">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="icon-input" value="3" class="selectgroup-input" id="1">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="icon-input" value="4" class="selectgroup-input" id="1">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                Muy en desacuerdo
+            </div>
+        </div>
+
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+
+    <div class="col-md-12 ml-auto mr-auto text-center inactived question" id="2" style="padding-top: 70px;">
+        <h2 class="fw-bold">El Directorio brinda un fuerte y consistente soporte al programa de Ciberseguridad </h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h4 fw-bold my-auto">
+                Estoy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="1" class="selectgroup-input" id="2">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="2" class="selectgroup-input" id="2">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="check-1" value="0" class="selectgroup-input" checked id="2">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="3" class="selectgroup-input" id="2">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="4" class="selectgroup-input" id="2">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                No estoy de acuerdo
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+    <div class="col-md-12 ml-auto mr-auto text-center inactived question" id="3" style="padding-top: 70px;">
+        <h2 class="fw-bold">El Directorio siempre está involucrado en actividades claves de Ciberseguridad</h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h3 fw-bold my-auto">
+                Estoy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="1" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="2" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="check-1" value="0" class="selectgroup-input" checked>
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="3" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="4" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                No estoy de acuerdo
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+    <div class="col-md-12 ml-auto mr-auto text-center inactived question" id="4" style="padding-top: 70px;">
+        <h2 class="fw-bold">La evaluación de los riesgos de Ciberseguridad se lleva a cabo antes de desarrollar nuevas políticas</h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h4 fw-bold my-auto">
+                Estoy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="1" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="2" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="check-1" value="0" class="selectgroup-input" checked>
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="3" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="4" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                No estoy de acuerdo
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+
+    <div class="col-md-12 ml-auto mr-auto text-center inactived question" id="5" style="padding-top: 70px;">
+        <h2 class="fw-bold">Estoy familiarizado con la política sobre conflicto de interés</h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h4 fw-bold my-auto">
+                Estoy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="1" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="2" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="check-1" value="0" class="selectgroup-input" checked>
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="3" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="4" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                No estoy de acuerdo
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+
+    <div class="col-md-12 ml-auto mr-auto text-center inactived question" id="6" style="padding-top: 70px;">
+        <h2 class="fw-bold">Me hago cargo de los resultados de mis decisiones y acciones de Ciberseguridad</h2>
+        
+        <div class="col-md-12 row mt-5">
+            <div class="col-md-3 text-success h3 fw-bold my-auto">
+                Estoy de acuerdo
+            </div>
+            <div class="col-md-6 text-center">
+                    <div class="selectgroup selectgroup-primary selectgroup-pills text-center">
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="1" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-grin-beam fa-3x"></i></span>
+                        </label>
+                        <label class="selectgroup-item mr-5 my-auto">
+                            <input type="radio" name="check-1" value="2" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="a-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item my-auto">
+                            <input type="radio" name="check-1" value="0" class="selectgroup-input" checked>
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-meh fa-lg"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="3" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon" style="height: 45px; width: 45px;"><i class="fa-2x"></i></span>
+                        </label>
+                        <label class="selectgroup-item ml-5 my-auto">
+                            <input type="radio" name="check-1" value="4" class="selectgroup-input">
+                            <span class="selectgroup-button selectgroup-button-icon"><i class="far fa-frown fa-3x"></i></span>
+                        </label>
+                    </div>
+            </div>
+            <div class="col-md-3 text-danger h4 fw-bold my-auto">
+                No estoy de acuerdo
+            </div>
+        </div>
+        <hr style="padding: 0; margin: 0; background-color: #575962; margin-top: 70px;">
+    </div>
+
+    <button class="btn btn-primary btn-lg mt-5 mb-5 col-md-2 mr-auto ml-auto btn-round">Siguiente</button>
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %} 
+
+<script>
+    
+    $('.selectgroup-input').click(function(){
+
+        var div = $(this).parents(':eq(4)')
+        div.addClass("inactived");
+        div.next().removeClass("inactived");
+
+        var elOffset = div.next().offset().top;
+        var elHeight = div.next().height();
+        var windowHeight = $(window).height();
+        var offset;
+
+        if (elHeight < windowHeight) {
+            offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+        }
+        else {
+            offset = elOffset;
+        }
+
+        $('html, body').animate({scrollTop:offset}, 500);
+      })
+    
+</script>
+    
+{% endblock javascripts %}
