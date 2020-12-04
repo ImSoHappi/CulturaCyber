@@ -86,11 +86,14 @@ WSGI_APPLICATION = 'culturacyberBase.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd77ofkk158gi0m',
+        'USER': 'afoexoiijllxgi',
+        'PASSWORD': '1acd0fbdf64d9d0dc7898edf76622d78326719a5eb2db53c9c8b841c8f394149',
+        'HOST': 'ec2-54-160-161-214.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
-
 
 
 # Password validation
