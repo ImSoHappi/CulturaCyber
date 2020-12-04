@@ -323,7 +323,7 @@ def module_client(request, module, client):
     context['client'] = clientModel.get_client(client)
     context['client_activities'] = clientModel.my_activities(client, module)
     context['client_tasks'] = clientModel.my_tasks(client, module)
-    context['client_module'] = client_module_Model.get_client_module(module, client)
+    context['client_module'] = client_module_Model.get_or_create_client_module(module, client)
     context['rejected_task'] = taskModel.get_rejected_module_task(module, client).count()
     context['inprocess_task'] = taskModel.get_inprocess_module_task(module, client).count()
     context['finished_task'] = taskModel.get_finished_module_task(module, client).count()
