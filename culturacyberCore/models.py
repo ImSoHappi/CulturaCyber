@@ -38,7 +38,7 @@ ACTIVITIES = (
 class client_module_Model(models.Model):
     client = models.ForeignKey('culturacyberAuth.clientModel', on_delete=models.CASCADE, blank=True, null=True)
     module = models.ForeignKey('moduleModel', to_field='uuid', on_delete= models.CASCADE, blank=True, null=True)
-    teamslink = models.TextField(blank=True, null=True)
+    teamslink = models.TextField(default='no_link')
     disabled = models.BooleanField(default = False)
 
     class Meta:
