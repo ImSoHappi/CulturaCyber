@@ -11,6 +11,7 @@ class userModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     disabled = models.BooleanField(default = False)
+    verified_account = models.BooleanField(default=False)
 
     user = models.OneToOneField(User, on_delete = models.CASCADE, related_name="extend")
     client = models.ForeignKey('clientModel', on_delete = models.CASCADE)
@@ -32,7 +33,7 @@ class clientModel(models.Model):
     disabled = models.BooleanField(default = False)
 
     name = models.CharField(max_length = 50)
-    description = models.TextField(max_length=100)
+    description = models.TextField()
     teamslink = models.TextField()
 
     def __str__(self):

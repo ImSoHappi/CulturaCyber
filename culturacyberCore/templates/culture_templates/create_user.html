@@ -46,9 +46,12 @@
                         {{ form_user.is_organizer }}
                         <span class="form-check-sign"></span>{{ form_user.is_organizer.label_tag }}</span>
                     </label>
-                </div>
 
-                <button class="btn btn-success pull-right mt-3 mb-3" type="submit" name="create_user">Crear</button>
+                    <p class="mt-4">Al crear el usuario se le enviara un correo electrónico para poder validar su cuenta y terminar de rellenar su perfil.</p>
+
+                    <button class="btn btn-success mb-3" type="submit" name="create_user" id="blockbutton">Crear</button>
+                    <button class="btn btn-success mb-3" style="width: 80px; display: none;" id="spinner-button"><span class="btn-label"><i class="fas fa-spinner fa-lg i-spinner"></i></span></button>
+                </div>
 
             </form>
 
@@ -63,4 +66,10 @@
 
 
 {% block javascripts %} 
+<script>
+    $('#blockbutton').click(function() {
+        $(this).hide();
+        $('#spinner-button').show();
+    });
+</script>
 {% endblock javascripts %}

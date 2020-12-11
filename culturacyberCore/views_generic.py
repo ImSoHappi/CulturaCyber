@@ -5,9 +5,8 @@ from django.contrib import messages
 from django.http import HttpResponseServerError
 from .models import moduleModel
 from culturacyberAuth.models import userModel
-from culturacyberAuth.forms import UpdateProfile
+from culturacyberAuth.forms import UpdateProfile, Completeprofile
 from django.contrib.auth.models import User
-
 from culturacyberAuth.forms import loginForm
 
 def login_view(request):
@@ -23,12 +22,43 @@ def login_view(request):
             password = form.cleaned_data['password']
             user = authenticate(username=user, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('redirector')
+                user_extend = userModel.objects.get(user=user)
+                if user_extend.verified_account:
+                    login(request, user)
+                    return redirect('redirector')
+                else:
+                    messages.error(request, "La cuenta no está verificada, por favor contacta a cultura cybertrust.", extra_tags="red" )
             else:
                 messages.error(request, "Credenciales incorrectas, intentalo de nuevo.", extra_tags="red" )
 
     return render(request, 'auth/login.html')
+
+
+def complete_register(request, user):
+    userextend = userModel.objects.get(uuid=user)
+
+    if userextend.verified_account:
+        return redirect('login')
+
+    if request.method == "POST":
+        form = Completeprofile(request.POST)
+        if form.is_valid():
+            pass1 = form.cleaned_data['password1']
+            pass2 = form.cleaned_data['password2']
+            if pass1 == pass2:
+                user_update = User.objects.get(username=userextend)
+                user_update.set_password(pass1)
+                user_update.first_name = form.cleaned_data["first_name"]
+                user_update.last_name = form.cleaned_data["last_name"]
+                user_update.save()
+
+                userextend.verified_account = True
+                userextend.save()
+
+                messages.success(request, "Registro de cuenta exitoso, ahora ingresa sesion con tus nuevas credenciales.", extra_tags="green" )
+                return redirect('login')
+
+    return render(request, 'auth/complete_register.html')
 
 
 @login_required
@@ -36,7 +66,6 @@ def logout_view(request):
     logout(request)
     messages.error(request, "Has cerrado sesion correctamente.", extra_tags="green" )
     return redirect('login')
-
 
 @login_required
 def redirector(request):
