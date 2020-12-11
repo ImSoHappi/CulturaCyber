@@ -11,6 +11,7 @@ urlpatterns = [
     path('redirector/', generic.redirector, name="redirector"),
     path('encuesta/', generic.survey , name='survey'),
     path('mi_perfil/', generic.my_profile, name='my_profile'),
+    path('completar_registro/<str:user>/', generic.complete_register, name='complete_register'),
 
     #Organizer views
     path('home/', organizer.home, name='organizer_home'),
@@ -32,10 +33,4 @@ urlpatterns = [
     path('listado_usuarios/cliente/<str:client>/', culture.client_users_list, name='client_users_list'),
 
     #User views
-
-
-    # path('listado_encuestas', views.survey_list, name='survey_list'),
-    # path('crear_encuestas', culture.add_survey, name='add_survey'),
-    # path('detalle_encuesta', views.survey_detail, name='survey_detail'),
-    # path('module', views.module, name='module'),
 ]

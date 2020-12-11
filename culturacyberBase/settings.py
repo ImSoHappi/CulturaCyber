@@ -41,11 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'culturacyberCore',
     'culturacyberAuth',
-    'ckeditor',
-    'ckeditor_uploader',
+    'culturacyberSurvey',
 ]
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,3 +134,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'culturacyberCore/collectstatic/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'culturacyberCore/media/')
+
+
+# EMAIL CULTURA 
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'SMTP.Office365.com'
+EMAIL_HOST_USER = 'culturacyber@cybertrust.cl'
+EMAIL_HOST_PASSWORD = 'WCS&qkmUEYAX'
+EMAIL_PORT = 587

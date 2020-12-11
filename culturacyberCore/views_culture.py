@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from culturacyberAuth.forms import mainuserForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .emails import verification_email
 
 @login_required(login_url='login')
 def home(request):
@@ -354,9 +355,7 @@ def create_user(request):
             mainform = mainuserForm(request.POST)
             form = userForm(request.POST)
             if mainform.is_valid():
-                user = User.objects.create_user(mainform.cleaned_data['username'], mainform.cleaned_data['username'], mainform.cleaned_data['password1'])
-                user.first_name = mainform.cleaned_data['first_name']
-                user.last_name = mainform.cleaned_data['last_name']
+                user = User.objects.create_user(mainform.cleaned_data['username'], mainform.cleaned_data['username'], mainform.cleaned_data['username'])
                 user.save()
                 client = clientModel.get_client(form['client'].value())
                 
@@ -372,8 +371,10 @@ def create_user(request):
 
                 userextend = userModel(user=user, client=client, is_cultureteam=culture , is_organizer=orgnizer)
                 userextend.save()
-                
-                messages.success(request ,"El usuario fue creado correctamente.", extra_tags="success")
+
+                verification_email(user)
+
+                messages.success(request ,"El usuario fue creado correctamente y el correo para terminar el registro fue enviado.", extra_tags="success")
                 return redirect('create_user')
             else:
                 messages.error(request, "El usuario no se ha podido crear", extra_tags="error" )

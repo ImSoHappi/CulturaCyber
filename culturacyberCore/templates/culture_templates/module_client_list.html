@@ -45,7 +45,7 @@
             {% if not client.client.disabled %}
                 {% if client.disabled %}
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <div class="card card-profile" style="background-color: #1571e81e; height: 400px !important;">
+                    <div class="card card-profile" style="background-color: #1571e81e; height: 400px;" id="bodycontent">
                         <div class="card-header" style="background-color:rgb(118, 149, 206);">
                             <form action="" method="POST">
                                 {% csrf_token %}
@@ -64,9 +64,9 @@
                         <div class="card-body">
                             <div class="user-profile text-center">
                                 <div class="name" style="text-transform: uppercase;">{{ client.client.name }}</div>
-                                <div class="desc text-dark text-justify">{{ client.client.description }}</div>
-                        
-                                <div class="view-profile">
+                                <div class="desc text-dark text-justify" style="height: 40px; overflow: hidden; text-overflow: clip;" id="description">{{ client.client.description }}</div>
+                                <div id="iconcontent"><i class="icon-arrow-up fa-lg"></i></div>
+                                <div class="view-profile mt-2">
                                     <a href="{% url 'module_client' module=segment.uuid client=client.client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
                                 </div>
                             </div>
@@ -76,10 +76,6 @@
                                 <div class="col">
                                     <div class="number">125</div>
                                     <div class="title">Actividades</div>
-                                </div>
-                                <div class="col">
-                                    <div class="number">25</div>
-                                    <div class="title">Encuestas</div>
                                 </div>
                                 <div class="col">
                                     <div class="number">134</div>
@@ -110,9 +106,9 @@
                         <div class="card-body">
                             <div class="user-profile text-center">
                                 <div class="name" style="text-transform: uppercase;">{{ client.client.name }}</div>
-                                <div class="desc text-justify">{{ client.client.description }}</div>
-                        
-                                <div class="view-profile">
+                                <div class="desc text-dark text-justify" style="height: 40px; overflow: hidden; text-overflow: clip;" id="description">{{ client.client.description }}</div>
+                                <div id="iconcontent"><i class="icon-arrow-up fa-lg"></i></div>
+                                <div class="view-profile mt-2">
                                     <a href="{% url 'module_client' module=segment.uuid client=client.client.uuid %}" class="btn btn-primary btn-block">Detalles</a>
                                 </div>
                             </div>
@@ -122,10 +118,6 @@
                                 <div class="col">
                                     <div class="number">125</div>
                                     <div class="title">Actividades</div>
-                                </div>
-                                <div class="col">
-                                    <div class="number">25</div>
-                                    <div class="title">Encuestas</div>
                                 </div>
                                 <div class="col">
                                     <div class="number">134</div>
@@ -160,9 +152,9 @@
                     <div class="card-body">
                         <div class="user-profile text-center">
                             <div class="name" style="text-transform: uppercase;">{{ client.name }}</div>
-                            <div class="desc text-dark text-justify">{{ client.description }}</div>
-                    
-                            <div class="view-profile">
+                            <div class="desc text-dark text-justify" style="height: 40px; overflow: hidden; text-overflow: clip;" id="description">{{ client.description }}</div>
+                            <div id="iconcontent"><i class="icon-arrow-up fa-lg"></i></div>
+                            <div class="view-profile mt-2">
                                 <a href="{% url 'module_client' module=segment.uuid client=client.uuid %}" class="btn btn-block" style="background-color: rgb(118, 149, 206); color: white;">Detalles</a>
                             </div>
                         </div>
@@ -172,10 +164,6 @@
                             <div class="col">
                                 <div class="number">125</div>
                                 <div class="title">Actividades</div>
-                            </div>
-                            <div class="col">
-                                <div class="number">25</div>
-                                <div class="title">Encuestas</div>
                             </div>
                             <div class="col">
                                 <div class="number">134</div>
@@ -198,11 +186,31 @@
 
 {% block javascripts %} 
 <script type="text/javascript">
+
     var $ = jQuery.noConflict();
     function open_modal(url){
         $('#edit').load(url, function(){
             $(this).modal('show');
         });
     }
+
+</script>
+
+<script>
+
+$( "div #iconcontent" ).on( "click", function() {
+
+    if($(this).find('i').hasClass('icon-arrow-up')){
+        $(this).find('i').toggleClass("icon-arrow-up icon-arrow-down");
+        $(this).prev().css( "height", "auto" );
+        $(this).closest("#bodycontent").css("height", "auto")
+    }
+    else{
+        $(this).find('i').toggleClass("icon-arrow-up icon-arrow-down");
+        $(this).prev().css( "height", "40px" );
+        $(this).closest("#bodycontent").css("height", "400px")
+    }
+});
+
 </script>
 {% endblock javascripts %}

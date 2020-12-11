@@ -168,3 +168,17 @@ div.inactived{
         -ms-user-select: none; 
             user-select: none; 
 }
+
+
+.i-spinner {
+  animation: i-spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes i-spin{
+  0%{
+    background:transparent;
+    transform: rotate(454deg); 
+  }
+
+}
